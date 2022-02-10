@@ -25,15 +25,15 @@ const WishlistButton: FC<Props> = ({
   const {customerInfo,} = state;
 
   const addToWishlist = async () => {
-      const existItem = state.cart.cartItems.find((x) => x._id === product._id);
-      const quantity = existItem ? existItem.quantity + 1 : 1;
-      const { data } = await axios.get(`/api/products/${product._id}`);
-      if (data.countInStock < quantity) {
-        window.alert('Sorry. Product is out of stock');
-        return;
-      }
-      await dispatch({ type: 'WISHLIST_ADD_ITEM', payload: { ...product, quantity } });
-      setLoading(false)
+      // const existItem = state.cart.cartItems.find((x:any) => x._id === product._id);
+      // const quantity = existItem ? existItem.quantity + 1 : 1;
+      // const { data } = await axios.get(`/api/products/${product._id}`);
+      // if (data.countInStock < quantity) {
+      //   window.alert('Sorry. Product is out of stock');
+      //   return;
+      // }
+      // await dispatch({ type: 'WISHLIST_ADD_ITEM', payload: { ...product, quantity } });
+      // setLoading(false)
   }
 
 

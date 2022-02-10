@@ -8,7 +8,7 @@ import { FC, useEffect } from 'react'
 import type { AppProps } from 'next/app'
 import { Head } from '@components/common'
 import { ManagedUIContext } from '@components/ui/context'
-import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+// import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { DataStoreProvider } from '../utils/DataStore';
 import { AdminDataStoreProvider } from '../utils/admin/AdminDataStore';
 const Noop: FC = ({ children }) => <>{children}</>
@@ -25,7 +25,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Head />
       <DataStoreProvider>
       <AdminDataStoreProvider>
-        <PayPalScriptProvider deferLoading={true}>
+        {/* <PayPalScriptProvider deferLoading={true}> */}
           <SnackbarProvider anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
             <ManagedUIContext>
               <Layout pageProps={pageProps}>
@@ -33,7 +33,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
               </Layout>
             </ManagedUIContext>
           </SnackbarProvider>
-        </PayPalScriptProvider>
+        {/* </PayPalScriptProvider> */}
       </AdminDataStoreProvider>
       </DataStoreProvider>
     </>

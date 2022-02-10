@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { DataStore } from '../../utils/admin/DataStore';
+import { DataStore } from '../../../utils/DataStore';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';

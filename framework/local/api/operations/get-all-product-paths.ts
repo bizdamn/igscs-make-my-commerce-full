@@ -9,7 +9,7 @@ export default async function getAllProductPathsOperation() {
     const {data} = await axios.post('/api/products', {_id:process.env.STORE_OBJECT_ID});
 
     return Promise.resolve({
-      products: data.physicalProducts.map(({ path }) => ({ path })),
+      products: data.physicalProducts.map(({path}:{path:any}) => ({ path })),
     })
   }
 

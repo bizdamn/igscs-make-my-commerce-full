@@ -32,12 +32,12 @@ const LoginView: FC<Props> = () => {
 
 
 
-  const submitHandler = async ({ email, password }:{email:any, password:any}) => {
+  const submitHandler = async (mainData:any) => {
     closeSnackbar();
     try {
         const { data } = await axios.post('/api/customers/login', {
-            email,
-            password,
+            email:mainData.email, 
+            password:mainData.password
         });
         dispatch({ type: 'CUSTOMER_LOGIN', payload: data });
         Cookies.set('customerInfo', data);

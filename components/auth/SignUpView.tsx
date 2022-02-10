@@ -28,18 +28,18 @@ const SignUpView: FC<Props> = () => {
   const { customerInfo } = state;
 
 
-  async function submitHandler({ name,email, password, confirmPassword}:{name:any,email:any,password:any,confirmPassword:any}) {
+  async function submitHandler(mainData:any) {
     closeSnackbar();
-    if (password !== confirmPassword) {
+    if (mainData.password !== mainData.confirmPassword) {
       enqueueSnackbar("Passwords don't match", { variant: 'error' });
       return;
     }
 else{
   try {
     const { data } = await axios.post('/api/customers/register', {
-      name,
-      email,
-      password,
+      name:mainData.name,
+      email:mainData.email,
+      password:mainData.password,
     });
     dispatch({ type: 'CUSTOMER_LOGIN', payload: data });
     Cookies.set('customerInfo', data);

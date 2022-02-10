@@ -11,7 +11,7 @@ import { Bag, Cross, Check } from '@components/icons'
 import SidebarLayout from '@components/common/SidebarLayout'
 import { DataStore } from '../../../utils/DataStore';
 const CartSidebarView: FC = () => {
-  const { state, dispatch } = useContext(DataStore);
+  const { state } = useContext(DataStore);
   const {cart} = state;
   const { closeSidebar, setSidebarView } = useUI()
   // const { isLoading, isEmpty } = useCart()
@@ -102,11 +102,11 @@ const CartSidebarView: FC = () => {
             <ul className="pb-2">
               <li className="flex justify-between py-1">
                 <span>Total Items</span>
-                <span>({cart.cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}items)</span>
+                <span>({cart.cartItems.reduce((a:any,c:any) => a + c.quantity, 0)}{' '}items)</span>
               </li>
               <li className="flex justify-between py-1">
                 <span>Subtotal</span>
-                <span>{cart.cartItems.reduce((a, c) => a + c.quantity * c.price.value, 0)}</span>
+                <span>{cart.cartItems.reduce((a:any,c:any) => a + c.quantity * c.price.value, 0)}</span>
               </li>
               <li className="flex justify-between py-1">
                 <span>Taxes</span>
@@ -119,14 +119,14 @@ const CartSidebarView: FC = () => {
             </ul>
             <div className="flex justify-between border-t border-accent-2 py-3 font-bold mb-2">
               <span>Total</span>
-              <span>{cart.cartItems.reduce((a, c) => a + c.quantity * c.price.value, 0)+15}</span>
+              <span>{cart.cartItems.reduce((a:any,c:any) => a + c.quantity * c.price.value, 0)+15}</span>
             </div>
             <div>
               {process.env.COMMERCE_CUSTOMCHECKOUT_ENABLED ? (
                 <Link href="/shipping">
                 <a>
                 <Button Component="a" width="100%" >
-                  Proceed to Checkout ({cart.cartItems.reduce((a, c) => a + c.quantity * c.price.value, 0)+15})
+                  Proceed to Checkout ({cart.cartItems.reduce((a:any,c:any) => a + c.quantity * c.price.value, 0)+15})
                 </Button></a>
                 </Link>
               ) : (

@@ -17,7 +17,7 @@ interface ProductSidebarProps {
   className?: string
 }
 
-const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }:{ product:any, className:any}) => {
+const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }:{ product:any, className?:any}) => {
   const { state, dispatch } = useContext(DataStore);
   const addItem = useAddItem()
   const { openSidebar } = useUI()

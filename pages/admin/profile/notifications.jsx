@@ -1,5 +1,5 @@
 import React, { useContext,useEffect } from "react";
-import Layout from "../../layouts/Layout/Layout";
+import Layout from "../../../layouts/Layout/Layout";
 import { useRouter } from 'next/router';
 import { AdminDataStore } from '../../../utils/admin/AdminDataStore';
 export default function SEO() {

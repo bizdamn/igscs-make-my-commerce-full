@@ -10,7 +10,10 @@ export type SelectedOption = {
 }
 
 export type LineItem = {
-  id: string
+  _id: string
+  price:any
+  listPrice: number
+  images: Array<any>
   variantId: string
   productId: string
   name: string
@@ -32,7 +35,7 @@ export type ProductVariant = {
   // an order for the product variant.
   requiresShipping: boolean
   // The product variant’s price after all discounts are applied.
-  price: number
+  price: any
   // Product variant’s price, as quoted by the manufacturer/distributor.
   listPrice: number
   // Image associated with the product variant. Falls back to the product image

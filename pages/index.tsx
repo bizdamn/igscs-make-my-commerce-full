@@ -9,7 +9,7 @@ import PhysicalProduct from "../models/PhysicalProduct";
 import DigitalProduct from "../models/DigitalProduct";
 import Store from "../models/Store";
 
-export default function Home({ physicalProducts,store,digitalProducts }) {
+export default function Home({ physicalProducts,store,digitalProducts }:{ physicalProducts:any,store:any,digitalProducts:any }) {
   const { state, dispatch } = useContext(DataStore);
 
 

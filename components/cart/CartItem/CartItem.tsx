@@ -12,10 +12,10 @@ import Quantity from '@components/ui/Quantity'
 import axios from 'axios'
 import { DataStore } from '../../../utils/DataStore';
 type ItemOption = {
-  name: string
-  nameId: number
-  value: string
-  valueId: number
+  id: string
+  displayName: string
+  color?: string
+  values:Array<any>
 }
 
 const placeholderImg = '/product-img-placeholder.svg'
@@ -140,9 +140,8 @@ const CartItem = ({
             <div className="flex items-center pb-1">
               {options.map((option: ItemOption, i: number) => (
                 <div
-                  key={`${item.id}-${option.displayName}`}
-                  className="text-sm font-semibold text-accent-7 inline-flex items-center justify-center"
-                >
+                  key={`${item._id}-${option.displayName}`}
+                  className="text-sm font-semibold text-accent-7 inline-flex items-center justify-center">
 
                   {option.color ? (
                     <>

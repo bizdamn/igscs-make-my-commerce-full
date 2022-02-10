@@ -9,7 +9,7 @@ handler.post(async (req, res) => {
   console.log(req.body.item)
   await db.connect();
   const newCart = new Wishlist({
-    lineItems:[{})
+    lineItems:[{}]})
   const cart = await newCart.save();
   await db.disconnect();
   res.send(cart)
