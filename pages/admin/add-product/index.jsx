@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Layout from '../../../layouts/Layout/Layout';
 import Image from "next/image";
 import Link from "next/link";
@@ -6,9 +6,17 @@ import Grid from "@mui/material/Grid";
 import InfoIcon from '@mui/icons-material/Info';
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Tooltip from '@mui/material/Tooltip';
+import { AdminDataStore } from '../../../utils/admin/AdminDataStore';
 import IconButton from "@mui/material/IconButton";
 export default function addProduct() {
+    const { state } = useContext(AdminDataStore);
+    const { adminStoreInfo } = state;
+    useEffect(() => {
+        if (!adminStoreInfo) {
+          router.push('/admin/login');
+        }
+      }, []);
     const productTypes = [
         {
             title: "Digital Product",

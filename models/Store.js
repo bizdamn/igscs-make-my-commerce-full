@@ -2,15 +2,15 @@ import mongoose from 'mongoose';
 
 const storeSchema = new mongoose.Schema(
   {
-    storeName: { type: String, required: true, unique: true },
+    storeName: { type: String, required: false, unique: true },
     storeLink: { type: String, required: false, unique: true },
-    name: { type: String, required: true },
-    phone: { type: Number, required: true },
-    password: { type: String, required: true },
-    verified: { type: Boolean, required: true, default: false },
-    plan: { type: String, required: true, default: 'Trial' },
+    name: { type: String, required: false },
+    phone: { type: Number, required: false },
+    password: { type: String, required: false },
+    verified: { type: Boolean, required: false, default: false },
+    plan: { type: String, required: false, default: 'Basic' },
     companyName: { type: String, required: false },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: false, unique: true },
     title: { type: String, required: false },
     metatitle: { type: String, required: false },
     metadescription: { type: String, required: false },

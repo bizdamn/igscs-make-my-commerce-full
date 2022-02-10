@@ -28,7 +28,11 @@ export default function HomePage() {
   const { state, dispatch } = useContext(AdminDataStore);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { adminStoreInfo } = state;
-
+  useEffect(() => {
+    if (!adminStoreInfo) {
+      router.push('/admin/login');
+    }
+  }, []);
   const [value, setValue] = React.useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);

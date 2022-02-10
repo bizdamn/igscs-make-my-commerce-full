@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect,useState } from 'react';
 import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router';
@@ -31,27 +31,31 @@ export default function SignUp(props) {
     const { redirect } = router.query;
     const { state, dispatch } = useContext(AdminDataStore);
     const { adminStoreInfo } = state;
+    const [registerInfo,setRegisterInfo] =useState(Cookies.get('registerInfo'))
+
+
+
     useEffect(() => {
         if (adminStoreInfo) {
-            router.push('/');
+            router.push('/admin/');
         }
-        const registerInfo= Cookies.get('registerInfo')
+        
         if (!registerInfo) {
-            router.push('/register');
+            router.push('/admin/register');
         }
     }, []);
-
     const submitHandler = async ({ companyName, addressLine1, addressLine2, city, state, pinCode, country }) => {
-        setButtonProgressLoading(true);
+   
         closeSnackbar();
         try {
-            const registerInfo= Cookies.get('registerInfo')
+            setButtonProgressLoading(true);
+            
             const { data } = await axios.post('/api/admin/users/register', {
-                storeName:registerInfo.storeName,
-                name:registerInfo.name,
-                email:registerInfo.email,
-                phone:registerInfo.phone,
-                password:registerInfo.password,
+                storeName: registerInfo.storeName,
+                name: registerInfo.name,
+                email: registerInfo.email,
+                phone: registerInfo.phone,
+                password: registerInfo.password,
                 companyName,
                 addressLine1,
                 addressLine2,
@@ -63,7 +67,7 @@ export default function SignUp(props) {
             console.log(data)
             dispatch({ type: 'USER_LOGIN', payload: data });
             Cookies.set('adminStoreInfo', data);
-            router.push(redirect || '/');
+            router.push(redirect || '/admin');
             setButtonProgressLoading(false);
         } catch (err) {
             enqueueSnackbar(err,
@@ -87,6 +91,10 @@ export default function SignUp(props) {
     };
 
     const [buttonProgressLoading, setButtonProgressLoading] = React.useState(false);
+
+
+
+
     return (
         <ThemeProvider theme={theme}>
             <div style={styles.paperContainer}>
@@ -101,7 +109,7 @@ export default function SignUp(props) {
                             }}
                         >
 
-                            <Typography textAlign="center" sx={{ fontWeight: 700 }} component="p" variant="h5">
+                            <Typography textAlign="center" style={{ fontWeight: 700 }} component="p" variant="h5">
                                 Add an address so you can get paid
 
                             </Typography>
@@ -275,7 +283,6 @@ export default function SignUp(props) {
                                                             label='Pin Code'
                                                             inputProps={{ type: 'number' }}
                                                             error={Boolean(errors.pinCode)}
-
                                                             {...field}
                                                         ></TextField>
                                                     )}
@@ -314,12 +321,15 @@ export default function SignUp(props) {
 
                                 </Grid>
                                 <ChakraProvider>
-                                <ButtonSaveProgress text='Register' size='md' buttonProgressLoading={buttonProgressLoading} setButtonProgressLoading={setButtonProgressLoading} />
-                                    <Button className='hvr-grow' type="submit"
+                                    <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+
+                                        <ButtonSaveProgress text='Register' size='md' buttonProgressLoading={buttonProgressLoading} setButtonProgressLoading={setButtonProgressLoading} />
+                                    </div>
+                                    {/* <Button className='hvr-grow' type="submit"
                                         fullWidth sx={{ my: 1 }}
                                         style={{ width: '100%', backgroundColor: '#008060', color: 'white', marginTop: '2rem', marginBottom: '2rem' }} >
                                         Register
-                                    </Button>
+                                    </Button> */}
                                 </ChakraProvider>
 
                                 <Grid container justifyContent="center">

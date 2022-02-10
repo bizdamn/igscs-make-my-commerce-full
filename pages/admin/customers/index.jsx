@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState,useEffect,useContext} from 'react'
 import axios from 'axios'
 import Image from 'next/image'
 import Customer from '../../../models/Customer'
@@ -16,9 +16,16 @@ import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import { Text } from '@components/ui'
+import { AdminDataStore } from '../../../utils/admin/AdminDataStore';
 export default function Home({ customers }) {
+  const { state } = useContext(AdminDataStore);
+  const { adminStoreInfo } = state;
   const [emailsArray, setEmailArray] = useState([])
-
+  useEffect(() => {
+    if (!adminStoreInfo) {
+      router.push('/admin/login');
+    }
+  }, []);
   customers.map((element) => {
     emailsArray.push(element.email)
   })

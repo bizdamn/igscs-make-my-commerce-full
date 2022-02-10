@@ -124,12 +124,6 @@ export default function Search(props) {
   return (
     <>
 
-
-
-
-
-
-
       <Grid className={classes.mt1} container >
         <Grid item md={3}>
           <List>
@@ -253,30 +247,6 @@ export default function Search(props) {
           </Box>
         </Grid>
       </Grid>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     </>
   );

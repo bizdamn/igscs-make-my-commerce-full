@@ -6,7 +6,6 @@ import { Layout } from '@components/common'
 import { Container, Text } from '@components/ui'
 import { Bag, Cross, Check, MapPin, CreditCard } from '@components/icons'
 import { DataStore } from '../utils/DataStore';
-import { Typography } from "@material-ui/core";
 export async function getStaticProps({
   preview,
   locale,
@@ -24,7 +23,7 @@ export async function getStaticProps({
 }
 
 export default function Profile() {
-  const { state, dispatch } = useContext(DataStore);
+  const { state } = useContext(DataStore);
   const { customerInfo } = state;
   return (
     <Container>

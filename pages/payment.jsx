@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { DataStore } from '../utils/DataStore';
 import CheckoutWizard from '../components/CheckoutWizard';
 import { Layout } from '@components/common'
+import { useUI } from '@components/ui/context'
 import useStyles from '../utils/styles';
 import {
   Grid,
@@ -22,11 +23,17 @@ export default function Payment() {
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState('');
   const { state, dispatch } = useContext(DataStore);
-  const {
+  const { openModal } = useUI()
+  const {customerInfo,
     storeInfo,
     cart: { shippingAddress },
   } = state;
   useEffect(() => {
+    if (!customerInfo) {
+      router.push('/');
+      openModal()
+    }
+
     if (!shippingAddress.address) {
       router.push('/shipping');
     } else {

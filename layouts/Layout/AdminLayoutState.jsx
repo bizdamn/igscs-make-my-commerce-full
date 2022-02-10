@@ -26,11 +26,11 @@ export default function AdminLayoutState(props) {
   const { adminStoreInfo } = state;
 
   const router = useRouter();
-  useEffect(() => {
-    if (!adminStoreInfo) {
-      router.push('/admin/login');
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!adminStoreInfo) {
+  //     router.push('/admin/login');
+  //   }
+  // }, []);
   var classes = useStyles();
 
   // global

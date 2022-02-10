@@ -32,7 +32,11 @@ export default function Policies({ store }) {
     control,
     formState: { errors },
   } = useForm();
-
+  useEffect(() => {
+    if (!adminStoreInfo) {
+      router.push('/admin/login');
+    }
+  }, []);
   const [RefundPolicyHtml, setRefundPolicyHtml] = React.useState(store.policies.RefundPolicyHtml);
   const [PrivacyPolicyHtml, setPrivacyPolicyHtml] = React.useState(store.policies.PrivacyPolicyHtml);
   const [ShippingPolicyHtml, setShippingPolicyHtml] = React.useState(store.policies.ShippingPolicyHtml);

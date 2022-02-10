@@ -5,6 +5,7 @@ import { Layout } from '@components/common'
 import {  Text } from '@components/ui'
 import NextLink from 'next/link';
 import Image from 'next/image';
+import { useUI } from '@components/ui/context'
 import {
   Grid,
   TableContainer,
@@ -31,6 +32,7 @@ function PlaceOrder() {
   const classes = useStyles();
   const router = useRouter();
   const { state, dispatch } = useContext(DataStore);
+  const { openModal } = useUI()
   const {
     customerInfo,
     storeInfo,
@@ -47,6 +49,10 @@ function PlaceOrder() {
   useEffect(() => {
     if (!paymentMethod) {
       router.push('/payment');
+    }
+    if (!customerInfo) {
+      router.push('/');
+      openModal()
     }
     if (paymentMethod.length === 0) {
       router.push('/cart');

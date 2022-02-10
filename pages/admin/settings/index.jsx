@@ -23,6 +23,11 @@ export default function Setting({store}) {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     const { state, dispatch } = useContext(AdminDataStore);
     const { adminStoreInfo } = state;
+    useEffect(() => {
+        if (!adminStoreInfo) {
+          router.push('/admin/login');
+        }
+      }, []);
     const {
         handleSubmit,
         control,

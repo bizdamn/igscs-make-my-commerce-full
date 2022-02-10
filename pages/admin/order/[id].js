@@ -91,7 +91,9 @@ function Order({ params }) {
   } = order;
 
   useEffect(() => {
-
+    if (!adminStoreInfo) {
+      router.push('/admin/login');
+    }
     const fetchOrder = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });

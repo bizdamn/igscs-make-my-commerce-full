@@ -26,7 +26,11 @@ export default function Categories({ store}) {
     const { state, dispatch } = useContext(AdminDataStore);
     const { adminStoreInfo } = state;
     const [featureFields, setFeatureFields] = useState(store.categories);
-
+    useEffect(() => {
+        if (!adminStoreInfo) {
+          router.push('/admin/login');
+        }
+      }, []);
 
     const handleChangeInput = (id, event) => {
         const newfeatureFields = featureFields.map(i => {

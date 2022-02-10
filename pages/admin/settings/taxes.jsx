@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import db from "../../../utils/db";
 import Store from "../../../models/Store";
 import Layout from '../../../layouts/Layout/Layout';
@@ -22,7 +22,11 @@ export default function Taxes({store}) {
     formState: { errors },
   } = useForm();
 
-
+  useEffect(() => {
+    if (!adminStoreInfo) {
+      router.push('/admin/login');
+    }
+  }, []);
 const[allPricesIncludeTaxes,setAllPricesIncludeTaxes]=useState(store.taxes.allPricesIncludeTaxes)
 const[shippingRatesTax,setShippingRatesTax]=useState(store.taxes.shippindigitalProductVATgRatesTax)
 const[digitalProductVAT,setDigitalProductVAT]=useState(store.taxes.digitalProductVAT)

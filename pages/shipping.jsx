@@ -28,11 +28,12 @@ export default function Shipping() {
     cart: { shippingAddress },
   } = state;
 
-  const { closeSidebarIfPresent } = useUI()
+  const { closeSidebarIfPresent, openModal } = useUI()
   useEffect(() => {
     closeSidebarIfPresent()
     if (!customerInfo) {
-      setValue.push('/login?redirect=/shipping');
+      router.push('/');
+      openModal()
     }
     setValue('fullName', shippingAddress.fullName);
     setValue('address', shippingAddress.address);

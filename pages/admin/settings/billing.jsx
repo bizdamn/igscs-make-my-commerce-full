@@ -21,7 +21,11 @@ export default function Billing({ store }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  useEffect(() => {
+    if (!adminStoreInfo) {
+      router.push('/admin/login');
+    }
+  }, []);
 
 
   const submitHandler = async ({ }) => {

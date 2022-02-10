@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect,useContext} from 'react'
 import axios from 'axios'
 import Image from 'next/image'
 import EmailTextEditor from '../../../components/admin/customers/email/EmailTextEditor'
@@ -8,10 +8,12 @@ import Layout from '../../../layouts/Layout/Layout';
 import Typography from "@mui/material/Typography";
 import Box from '@mui/material/Box';
 import ButtonSaveProgress from '../../../components/admin/ui/ButtonSaveProgress'
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
-
+import { AdminDataStore } from '../../../utils/admin/AdminDataStore';
 export default function Home({ customers }) {
+  const { state } = useContext(AdminDataStore);
+  const { adminStoreInfo } = state;
   const [buttonProgressLoading, setButtonProgressLoading] = React.useState(false);
   const [emailsArray, setEmailArray] = useState([])
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -24,7 +26,11 @@ export default function Home({ customers }) {
     formState: { errors },
   } = useForm();
 
-
+  useEffect(() => {
+    if (!adminStoreInfo) {
+      router.push('/admin/login');
+    }
+  }, []);
   function callToSendEmail() {
 
   }

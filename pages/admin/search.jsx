@@ -16,7 +16,7 @@ import Rating from '@mui/material/Rating';
 import Pagination from '@mui/material/Pagination';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import React, { useContext ,useEffect} from 'react';
 import Layout from '../../layouts/Layout/Layout';
 import db from '../../utils/admin/db';
 import SupplierProduct from '../../models/SupplierProduct';
@@ -49,7 +49,11 @@ export default function Search(props) {
 
   const classes = useStyles();
   const router = useRouter();
-
+  useEffect(() => {
+    if (!adminStoreInfo) {
+      router.push('/admin/login');
+    }
+  }, []);
 
   const {
     query = 'all',

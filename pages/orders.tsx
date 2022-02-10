@@ -29,7 +29,7 @@ import { DataStore } from '../utils/DataStore';
 import useStyles from '../utils/styles';
 import { Button } from '@components/ui'
 
-function reducer(state, action) {
+function reducer(state:any, action:any) {
   switch (action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true, error: '' };
@@ -114,7 +114,7 @@ export default function Orders() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {orders.map((order) => (
+                      {orders.map((order:any) => (
                         <TableRow key={order._id}>
                           <TableCell>{order._id.substring(20, 24)}</TableCell>
                           <TableCell>{order.createdAt}</TableCell>

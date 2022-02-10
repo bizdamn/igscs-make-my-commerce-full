@@ -31,7 +31,11 @@ export default function Sales({ totalOrders, totalDeliveredOrders, totalRevenue,
   const router = useRouter();
   var theme = useTheme();
 
-
+  useEffect(() => {
+    if (!adminStoreInfo) {
+      router.push('/admin/login');
+    }
+  }, []);
   
   return (
     <Layout>

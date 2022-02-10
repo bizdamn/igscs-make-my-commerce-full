@@ -38,19 +38,19 @@ export default function SignUp(props) {
         }
         const registerInfo=  Cookies.get('registerInfo')
         if (registerInfo) {
-            router.push('/register/add-location');
+            router.push('/admin/register/add-location');
         }
     }, []);
 
     const submitHandler = async ({ name, storeName, email, phone, password, confirmPassword }) => {
-        setButtonProgressLoading(true);
+     
         closeSnackbar();
         if (password !== confirmPassword) {
             enqueueSnackbar("Passwords don't match", { variant: 'error' });
             return;
         }
         try {
-        
+            setButtonProgressLoading(true);
             Cookies.set('registerInfo', {
                 storeName,
                 name,
@@ -59,7 +59,7 @@ export default function SignUp(props) {
                 password,
             });
 
-            router.push(redirect || '/register/add-location');
+            router.push(redirect || '/admin/register/add-location');
             setButtonProgressLoading(false);
         } catch (err) {
             enqueueSnackbar(err,
@@ -287,12 +287,14 @@ export default function SignUp(props) {
                                     </Grid>
                                 </Grid>
                                 <ChakraProvider>
+                                    <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
                                 <ButtonSaveProgress text='Register' size='md' buttonProgressLoading={buttonProgressLoading} setButtonProgressLoading={setButtonProgressLoading} />
-                                    <Button className='hvr-grow' type="submit"
+                                </div>
+                                    {/* <Button className='hvr-grow' type="submit"
                                         fullWidth sx={{my:1}}
                                         style={{ width: '100%', backgroundColor: '#008060', color: 'white', marginTop: '2rem', marginBottom: '2rem' }} >
                                         Register
-                                    </Button>
+                                    </Button> */}
                                 </ChakraProvider>
 
                                 <Grid container justifyContent="center">

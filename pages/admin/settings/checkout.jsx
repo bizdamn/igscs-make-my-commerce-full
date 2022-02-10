@@ -24,7 +24,11 @@ export default function Checkout({ store }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  useEffect(() => {
+    if (!adminStoreInfo) {
+      router.push('/admin/login');
+    }
+  }, []);
   const[CodAvailable, setCodAvailable] = useState(store.checkout?.CodAvailable)
   const[checkoutCustomerAccount, setCheckoutCustomerAccount] = useState(store.checkout?.checkoutCustomerAccount)
   const[lastName, setLastName] = useState(store.formOptions?.lastName)
