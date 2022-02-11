@@ -46,7 +46,7 @@ export default function SignInSide() {
         password,
       })
       dispatch({ type: 'USER_LOGIN', payload: data })
-      Cookies.set('adminStoreInfo', data)
+      Cookies.set('adminStoreInfo', JSON.stringify(data))
       setButtonProgressLoading(false)
       router.push('/admin')
     } catch (err) {

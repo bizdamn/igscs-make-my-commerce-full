@@ -24,7 +24,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import useStyles from '../../../utils/admin/styles';
 import { useSnackbar } from 'notistack';
-import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+// import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -62,7 +62,7 @@ function reducer(state, action) {
 
 function Order({ params }) {
   const orderId = params.id;
-  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+  // const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
   const classes = useStyles();
   const router = useRouter();
   const { state } = useContext(AdminDataStore);
@@ -120,20 +120,20 @@ function Order({ params }) {
         dispatch({ type: 'DELIVER_RESET' });
       }
     } else {
-      const loadPaypalScript = async () => {
-        const { data: clientId } = await axios.get('/api/admin/keys/paypal', {
-          headers: { authorization: `Bearer ${adminStoreInfo.token}` },
-        });
-        paypalDispatch({
-          type: 'resetOptions',
-          value: {
-            'client-id': clientId,
-            currency: 'USD',
-          },
-        });
-        paypalDispatch({ type: 'setLoadingStatus', value: 'pending' });
-      };
-      loadPaypalScript();
+      // const loadPaypalScript = async () => {
+      //   const { data: clientId } = await axios.get('/api/admin/keys/paypal', {
+      //     headers: { authorization: `Bearer ${adminStoreInfo.token}` },
+      //   });
+      //   paypalDispatch({
+      //     type: 'resetOptions',
+      //     value: {
+      //       'client-id': clientId,
+      //       currency: 'USD',
+      //     },
+      //   });
+      //   paypalDispatch({ type: 'setLoadingStatus', value: 'pending' });
+      // };
+      // loadPaypalScript();
     }
   }, [order, successPay, successDeliver]);
   const { enqueueSnackbar } = useSnackbar();
@@ -350,7 +350,7 @@ function Order({ params }) {
                     </Grid>
                   </Grid>
                 </ListItem>
-                {!isPaid && (
+                {/* {!isPaid && (
                   <ListItem>
                     {isPending ? (
                       <CircularProgress />
@@ -358,7 +358,7 @@ function Order({ params }) {
                       <></>
                     )}
                   </ListItem>
-                )}
+                )} */}
                 {adminStoreInfo.isAdmin && order.isPaid && !order.isDelivered && (
                   <ListItem>
                     {loadingDeliver && <CircularProgress />}

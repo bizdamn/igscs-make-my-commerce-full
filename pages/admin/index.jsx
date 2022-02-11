@@ -43,7 +43,7 @@ export default function HomePage() {
     setDevices(deviceName);
   };
 
-  const [demoURL, setDemoTheme] = useState('https://aaaaa-nu.vercel.app/')
+  const [demoURL, setDemoTheme] = useState(adminStoreInfo?.storeLink)
   return (
     <>
       <Layout>

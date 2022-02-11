@@ -66,7 +66,7 @@ export default function SignUp(props) {
             });
             console.log(data)
             dispatch({ type: 'USER_LOGIN', payload: data });
-            Cookies.set('adminStoreInfo', data);
+            Cookies.set('adminStoreInfo', JSON.stringify(data));
             router.push(redirect || '/admin');
             setButtonProgressLoading(false);
         } catch (err) {

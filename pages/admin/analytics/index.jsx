@@ -24,7 +24,7 @@ import {
 import { styled } from '@mui/material/styles';
 import { Animation } from '@devexpress/dx-react-chart';
 import ChartComponent from './chart'
-import { confidence as data } from './data-vizualization';
+import { confidence as data } from '../../../components/data-vizualization';
 export default function Sales({ totalOrders, totalDeliveredOrders, totalRevenue, totalShippingPrice }) {
   const { state, dispatch } = useContext(AdminDataStore);
   const { adminStoreInfo } = state;

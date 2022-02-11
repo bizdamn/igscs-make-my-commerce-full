@@ -26,6 +26,7 @@ import { AdminDataStore } from '../../utils/admin/AdminDataStore';
 import axios from 'axios';
 import Image from 'next/image'
 
+
 const PAGE_SIZE = 30;
 
 const prices = [
@@ -49,11 +50,8 @@ export default function Search(props) {
 
   const classes = useStyles();
   const router = useRouter();
-  useEffect(() => {
-    if (!adminStoreInfo) {
-      router.push('/admin/login');
-    }
-  }, []);
+  const { state, dispatch } = useContext(AdminDataStore);
+  const { adminStoreInfo } = state;
 
   const {
     query = 'all',
@@ -113,7 +111,7 @@ export default function Search(props) {
     filterSearch({ rating: e });
   };
 
-  const { state, dispatch } = useContext(AdminDataStore);
+
   const addToCartHandler = async (product) => {
     const existItem = state.cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
@@ -129,6 +127,12 @@ export default function Search(props) {
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
+  useEffect(() => {
+    if (!adminStoreInfo) {
+      router.push('/admin/login');
+    }
+  }, []);
   return (
     <Layout title="Search">
       <Grid className={classes.mt1} container spacing={1}>

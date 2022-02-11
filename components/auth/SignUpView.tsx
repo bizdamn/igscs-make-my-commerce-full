@@ -42,7 +42,7 @@ else{
       password:mainData.password,
     });
     dispatch({ type: 'CUSTOMER_LOGIN', payload: data });
-    Cookies.set('customerInfo', data);
+    Cookies.set('customerInfo', JSON.stringify(data));
     closeModal()
   } catch (err:any) {
     enqueueSnackbar(err,{ variant: 'error' });

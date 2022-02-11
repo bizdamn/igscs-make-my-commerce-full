@@ -25,7 +25,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import useStyles from '../../utils/styles';
 import { useSnackbar } from 'notistack';
-import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+// import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -63,7 +63,7 @@ function reducer(state, action) {
 
 function Order({ params }) {
   const orderId = params.id;
-  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+  // const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
   const classes = useStyles();
   const router = useRouter();
   const { state } = useContext(DataStore);
@@ -123,22 +123,24 @@ function Order({ params }) {
         dispatch({ type: 'DELIVER_RESET' });
       }
     } else {
-      const loadPaypalScript = async () => {
-        const { data: clientId } = await axios.get('/api/keys/paypal', {
-          headers: { authorization: `Bearer ${customerInfo.token}` },
-        });
-        paypalDispatch({
-          type: 'resetOptions',
-          value: {
-            'client-id': clientId,
-            currency: 'USD',
-          },
-        });
-        paypalDispatch({ type: 'setLoadingStatus', value: 'pending' });
-      };
-      loadPaypalScript();
+      // const loadPaypalScript = async () => {
+      //   const { data: clientId } = await axios.get('/api/keys/paypal', {
+      //     headers: { authorization: `Bearer ${customerInfo.token}` },
+      //   });
+      //   paypalDispatch({
+      //     type: 'resetOptions',
+      //     value: {
+      //       'client-id': clientId,
+      //       currency: 'USD',
+      //     },
+      //   });
+      //   paypalDispatch({ type: 'setLoadingStatus', value: 'pending' });
+      // };
+      // loadPaypalScript();
     }
-  }, [order, successPay, successDeliver, customerInfo, router, paypalDispatch, orderId]);
+  }, [order, successPay, successDeliver, customerInfo, router, 
+    // paypalDispatch,
+     orderId]);
   const { enqueueSnackbar } = useSnackbar();
 
   function createOrder(data, actions) {
@@ -420,7 +422,7 @@ function Order({ params }) {
                     </Grid>
                   </Grid>
                 </ListItem>
-                {!isPaid && paymentMethod === 'PayPal' && (
+                {/* {!isPaid && paymentMethod === 'PayPal' && (
                   <ListItem>
                     {isPending ? (
                       <CircularProgress />
@@ -434,18 +436,14 @@ function Order({ params }) {
                       </div>
                     )}
                   </ListItem>
-                )}
+                )} */}
                 {!isPaid && paymentMethod === 'RazorPay' && (
                   <ListItem>
-                    {isPending ? (
-                      <CircularProgress />
-                    ) : (
-                      <div className={classes.fullWidth}>
+                    <div className={classes.fullWidth}>
                         <Button  startIcon={<Avatar src={'/admin/images/dashboard/rajorpay.jpg'} />} onClick={() => makeRazorPayPayment(totalPrice)} fullWidth variant='outlined'>
                           RazorPay
                         </Button>
                       </div>
-                    )}
                   </ListItem>
                 )}
 

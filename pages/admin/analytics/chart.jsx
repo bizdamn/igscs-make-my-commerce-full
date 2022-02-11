@@ -10,7 +10,7 @@ import {
 } from '@devexpress/dx-react-chart-material-ui';
 import { styled } from '@mui/material/styles';
 import { Animation } from '@devexpress/dx-react-chart';
-import { confidence as data } from './data-vizualization';
+import { confidence as data } from '../../../components/data-vizualization';
 const PREFIX = 'Demo';
 
 const classes = {

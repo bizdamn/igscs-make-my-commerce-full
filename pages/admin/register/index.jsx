@@ -51,13 +51,13 @@ export default function SignUp(props) {
         }
         try {
             setButtonProgressLoading(true);
-            Cookies.set('registerInfo', {
+            Cookies.set('registerInfo', JSON.stringify({
                 storeName,
                 name,
                 email,
                 phone,
                 password,
-            });
+            }));
 
             router.push(redirect || '/admin/register/add-location');
             setButtonProgressLoading(false);
