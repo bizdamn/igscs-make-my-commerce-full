@@ -3,7 +3,7 @@ import { FC, useContext } from 'react'
 import Grid from '@mui/material/Grid';
 import Image from 'next/image'
 import styled from 'styled-components';
-import { Text,Container } from '@components/ui'
+import { Text, Container } from '@components/ui'
 import { DataStore } from '../utils/DataStore';
 export default function About() {
     const { state } = useContext(DataStore);
@@ -48,12 +48,12 @@ export default function About() {
 
                             </Table>
                         </Grid>
-                        <Grid style={{textAlign: 'center',padding:'3rem'}} item xs={12}>
-                        <Text variant="pageHeading">About Us</Text>
-                        <p>{storeInfo?.bio}</p>
+                        <Grid style={{ textAlign: 'center', padding: '3rem' }} item xs={12}>
+                            <Text variant="pageHeading">About Us</Text>
+                            <p>{storeInfo?.bio}</p>
                         </Grid>
                     </Grid>
-                   
+
 
 
                 </>

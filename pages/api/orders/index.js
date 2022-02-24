@@ -9,16 +9,19 @@ handler.use(isAuth);
 handler.post(async (req, res) => {
   await db.connect();
   const newOrder = new Order({
-    ...req.body,
-    customer: req.customer._id,
+    customer: req.body.customerID,
     storeID:process.env.STORE_OBJECT_ID,
+    orderItems:req.body.orderItems ,
+    shippingAddress:req.body.shippingAddress ,
+    paymentMethod:req.body.paymentMethod ,
+    itemsPrice:req.body.itemsPrice ,
+    shippingPrice:req.body.shippingPrice ,
+    taxPrice:req.body.taxPrice ,
+    totalPrice:req.body.totalPrice 
   });
   await db.disconnect();
   console.log(newOrder);
-
   const order = await newOrder.save();
-
-  console.log(order);
   res.send(order);
 });
 

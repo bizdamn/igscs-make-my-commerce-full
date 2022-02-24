@@ -70,6 +70,7 @@ function PlaceOrder() {
       const { data } = await axios.post(
         '/api/orders',
         {
+          customerID:customerInfo._id,
           orderItems: cartItems,
           shippingAddress,
           paymentMethod,
@@ -80,23 +81,24 @@ function PlaceOrder() {
         },
         {
           headers: {
-            authorization: `Bearer ${customerInfo.token}`,
+            authorization: `Bearer ${customerInfo.token}`
           },
         }
       );
+      console.log(data)
 
 
-      await axios.post(
-        '/api/email/new-order',
-        {
-          storeEmail:storeInfo.email,
-          orderItems: cartItems,
-          paymentMethod,
-          totalPrice,
-        });
-      await axios.post(
-        '/api/customers/order-count',
-        {customerInfo});
+      // await axios.post(
+      //   '/api/email/new-order',
+      //   {
+      //     storeEmail:storeInfo.email,
+      //     orderItems: cartItems,
+      //     paymentMethod,
+      //     totalPrice,
+      //   });
+      // await axios.post(
+      //   '/api/customers/order-count',
+      //   {customerInfo});
 
       dispatch({ type: 'CART_CLEAR' });
       Cookies.remove('cartItems');
