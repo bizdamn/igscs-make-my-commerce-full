@@ -4,19 +4,20 @@ import Container from '@mui/material/Container';
 import Skeleton from '@mui/material/Skeleton';
 import { AdminDataStore } from '../../../utils/admin/AdminDataStore';
 import Stack from '@mui/material/Stack';
+import Image from 'next/image'
 export default function GoogleSearchMockup() {
-    const { state, dispatch } = useContext(AdminDataStore);
+    const { state} = useContext(AdminDataStore);
     const { user } = state;
     return (
         <>
             <Container  justify="center" align="center">
                 <div className="logo">
-                    <img alt="Google" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" />
+                    <Image alt="Google" width="300" height="300" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" />
                 </div>
             </Container>
             <div className={styles.bar}>
                 <input className={styles.searchbar} type="text" title="Search" />
-                <img className={styles.voice} src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Google_mic.svg/716px-Google_mic.svg.png" title="Search by Voice" />
+                <Image alt="Google" width="300" height="300" className={styles.voice} src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Google_mic.svg/716px-Google_mic.svg.png" title="Search by Voice" />
             </div>
 
             <Container >

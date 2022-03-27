@@ -28,9 +28,9 @@ export default function Categories({ store}) {
     const [featureFields, setFeatureFields] = useState(store.categories);
     useEffect(() => {
         if (!adminStoreInfo) {
-          router.push('/admin/login');
+            router.push('/admin/login');
         }
-      }, []);
+    }, [adminStoreInfo]);
 
     const handleChangeInput = (id, event) => {
         const newfeatureFields = featureFields.map(i => {

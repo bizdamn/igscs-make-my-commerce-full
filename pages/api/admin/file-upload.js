@@ -10,7 +10,7 @@ export const config = {
     }
 };
  
-export default async (req, res) => {
+const FileUpload= async (req, res) => {
     
     const data = await new Promise((resolve, reject) => {
        const form = new IncomingForm()
@@ -28,3 +28,5 @@ export default async (req, res) => {
     })
     
 }
+
+export default FileUpload

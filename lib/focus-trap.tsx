@@ -17,15 +17,6 @@ export default function FocusTrap({ children, focusFirst = false }: Props) {
     }
   }
 
-  const trapFocus = () => {
-    // Focus the container element
-    if (root.current) {
-      root.current.focus()
-      if (focusFirst) {
-        selectFirstFocusableEl()
-      }
-    }
-  }
 
   const selectFirstFocusableEl = () => {
     // Try to find focusable elements, if match then focus
@@ -49,11 +40,21 @@ export default function FocusTrap({ children, focusFirst = false }: Props) {
   }
 
   useEffect(() => {
+    const trapFocus = () => {
+      // Focus the container element
+      if (root.current) {
+        root.current.focus()
+        if (focusFirst) {
+          selectFirstFocusableEl()
+        }
+      }
+    }
+  
     setTimeout(trapFocus, 20)
     return () => {
       returnFocus()
     }
-  }, [root, children])
+  }, [root, children,focusFirst])
 
   return React.createElement(
     'div',

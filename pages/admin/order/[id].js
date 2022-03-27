@@ -135,7 +135,7 @@ function Order({ params }) {
       // };
       // loadPaypalScript();
     }
-  }, [order, successPay, successDeliver]);
+  }, [order, successPay, successDeliver,router,adminStoreInfo,orderId]);
   const { enqueueSnackbar } = useSnackbar();
 
   function createOrder(data, actions) {

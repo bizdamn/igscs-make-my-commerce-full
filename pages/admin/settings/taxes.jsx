@@ -24,9 +24,9 @@ export default function Taxes({store}) {
 
   useEffect(() => {
     if (!adminStoreInfo) {
-      router.push('/admin/login');
+        router.push('/admin/login');
     }
-  }, []);
+}, [adminStoreInfo]);
 const[allPricesIncludeTaxes,setAllPricesIncludeTaxes]=useState(store.taxes.allPricesIncludeTaxes)
 const[shippingRatesTax,setShippingRatesTax]=useState(store.taxes.shippindigitalProductVATgRatesTax)
 const[digitalProductVAT,setDigitalProductVAT]=useState(store.taxes.digitalProductVAT)

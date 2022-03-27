@@ -145,7 +145,7 @@ export default function Header(props) {
             />
           )}
         </IconButton>
-        <Link href='/admin'><a><Image src={'/admin/images/light-logo.svg'} width={65} height={40} /></a></Link>
+        <Link href='/admin'><a><Image alt='Make My Commerce' src={'/admin/images/light-logo.svg'} width={65} height={40} /></a></Link>
         <Link href='/admin'><a>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
           Make My Commerce

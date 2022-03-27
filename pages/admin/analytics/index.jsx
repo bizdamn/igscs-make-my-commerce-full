@@ -33,9 +33,9 @@ export default function Sales({ totalOrders, totalDeliveredOrders, totalRevenue,
 
   useEffect(() => {
     if (!adminStoreInfo) {
-      router.push('/admin/login');
+        router.push('/admin/login');
     }
-  }, []);
+}, [router,adminStoreInfo]);
   
   return (
     <Layout>

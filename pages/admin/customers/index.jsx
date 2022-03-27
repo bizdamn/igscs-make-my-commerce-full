@@ -23,9 +23,9 @@ export default function Home({ customers }) {
   const [emailsArray, setEmailArray] = useState([])
   useEffect(() => {
     if (!adminStoreInfo) {
-      router.push('/admin/login');
+        router.push('/admin/login');
     }
-  }, []);
+}, [adminStoreInfo]);
   customers.map((element) => {
     emailsArray.push(element.email)
   })

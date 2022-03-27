@@ -85,7 +85,7 @@ function OrderHistory() {
       }
     };
     fetchOrders();
-  }, []);
+  }, [router,adminStoreInfo]);
 
 
   const [orderStatus, setOrderStatus] = React.useState('Pending');

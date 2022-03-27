@@ -66,9 +66,9 @@ function PricingContent() {
   const router = useRouter();
   useEffect(() => {
     if (!adminStoreInfo) {
-      router.push('/admin/login');
+        router.push('/admin/login');
     }
-  }, []);
+}, [router,adminStoreInfo]);
 
 
   const makePayment = async (e) => {

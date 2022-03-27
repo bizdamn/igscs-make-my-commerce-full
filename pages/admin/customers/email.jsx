@@ -28,9 +28,9 @@ export default function Home({ customers }) {
 
   useEffect(() => {
     if (!adminStoreInfo) {
-      router.push('/admin/login');
+        router.push('/admin/login');
     }
-  }, []);
+  }, [adminStoreInfo]);
   function callToSendEmail() {
 
   }

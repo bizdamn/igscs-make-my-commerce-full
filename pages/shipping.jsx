@@ -40,7 +40,7 @@ export default function Shipping() {
     setValue('city', shippingAddress.address);
     setValue('postalCode', shippingAddress.postalCode);
     setValue('country', shippingAddress.country);
-  }, [customerInfo,setValue,router,shippingAddress.fullName,shippingAddress.address,shippingAddress.postalCode, shippingAddress.country]);
+  }, [customerInfo,setValue,router,shippingAddress.fullName,shippingAddress.address,shippingAddress.postalCode, shippingAddress.country,openModal,closeSidebarIfPresent]);
 
   const classes = useStyles();
   const submitHandler = ({ fullName, address, city, postalCode, country }) => {

@@ -28,7 +28,7 @@ import FormControl from '@mui/material/FormControl';
 import { AdminDataStore } from '../../../utils/admin/AdminDataStore';
 import { useSnackbar } from 'notistack';
 
-export default function Digitalproduct() {
+export default function DigitalProduct() {
 
     const router = useRouter();
     const { redirect } = router.query;
@@ -40,7 +40,7 @@ export default function Digitalproduct() {
         if (!adminStoreInfo) {
             router.push('/admin/login');
         }
-    }, []);
+    }, [router,adminStoreInfo]);
     function slugify(string) {
         return string
             .toString()
@@ -92,7 +92,7 @@ export default function Digitalproduct() {
                         price: price,
                         listPrice: price.listPrice,
                         descriptionHtml: descriptionHtml,
-                        images: image ? ([{ url: `/assets/${image.name}`, altText: '' }]) : null,
+                        images: image ? ([{ url: `/${image.name}`, altText: '' }]) : null,
                         variants: [],
                         options: options,
                         status: status,

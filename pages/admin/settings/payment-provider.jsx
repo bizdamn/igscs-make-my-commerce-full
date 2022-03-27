@@ -26,10 +26,10 @@ export default function SEO() {
     } = useForm();
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     useEffect(() => {
-        if (!adminStoreInfo) {
+      if (!adminStoreInfo) {
           router.push('/admin/login');
-        }
-      }, []);
+      }
+  }, [router,adminStoreInfo]);
 
 
 
@@ -65,7 +65,7 @@ export default function SEO() {
                 alignItems: 'center',
               }}
             >
-          <Image width="100" height="100" src='/admin/images/dashboard/rajorpay.jpg'></Image>
+          <Image width="100" height="100" src='/admin/images/dashboard/rajorpay.jpg' alt='Razorpay'></Image>
           <Typography  component="p">Razorpay</Typography>
               <Box sx={{ mt: 1 }}>
 

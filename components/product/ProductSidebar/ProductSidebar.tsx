@@ -91,7 +91,7 @@ const ProductSidebar: FC<ProductSidebarProps> = ({ product, className }:{ produc
         {product.documents?.length > 0 ? (
 
           <Collapse title="Documents">
-            <a target="_blank" href={product.documents?.[0]}>
+            <a  href={product.documents?.[0]}>
               <div className="rounded-md border border-accent-2 px-6 py-6 mb-4 text-center flex items-center justify-center cursor-pointer hover:border-accent-4">
                 <div className="mr-5">
                   <AttachFileIcon />

@@ -43,27 +43,30 @@ function Shipping() {
         error: '',
     });
 
-    const fetchOrders = async () => {
-        try {
-            dispatch({ type: 'FETCH_REQUEST' });
-            const { data } = await axios.post(`/api/admin/shipping/`, {
-                storeID: adminStoreInfo._id,
-            });
-            console.log(JSON.stringify(data));
-            dispatch({ type: 'FETCH_SUCCESS', payload: data });
-        }
-        catch (err) {
-            dispatch({ type: 'FETCH_FAIL', payload: err });
-        }
-    };
+
 
     
+  
     useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                dispatch({ type: 'FETCH_REQUEST' });
+                const { data } = await axios.post(`/api/admin/shipping/`, {
+                    storeID: adminStoreInfo._id,
+                });
+                console.log(JSON.stringify(data));
+                dispatch({ type: 'FETCH_SUCCESS', payload: data });
+            }
+            catch (err) {
+                dispatch({ type: 'FETCH_FAIL', payload: err });
+            }
+        };
+
         if (!adminStoreInfo) {
             router.push('/admin/login');
         }
         fetchOrders();
-    }, [ ]);
+    }, [router,adminStoreInfo]);
 
     return (
         <Layout>

@@ -22,6 +22,7 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
     currencyCode: product.price.currencyCode!,
   })
 
+
   return (
     <>
       <Container className="max-w-none w-full" clean>
@@ -41,7 +42,7 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
                   <div key={image.url} className={s.imageContainer}>
                     <Image
                       className={s.img}
-                      src={image.url!}
+                      src={`/assets${image.url!}`}
                       alt={image.alt || 'Product Image'}
                       width={600}
                       height={600}

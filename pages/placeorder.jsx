@@ -57,7 +57,7 @@ function PlaceOrder() {
     if (paymentMethod.length === 0) {
       router.push('/cart');
     }
-  }, [paymentMethod,router]);
+  }, [paymentMethod,router,customerInfo,openModal]);
   const { closeSnackbar, enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
 
@@ -70,14 +70,14 @@ function PlaceOrder() {
       const { data } = await axios.post(
         '/api/orders',
         {
-          customerID:customerInfo._id,
-          orderItems: cartItems,
-          shippingAddress,
-          paymentMethod,
-          itemsPrice,
-          shippingPrice,
-          taxPrice,
-          totalPrice,
+          customerID:customerInfo._id
+          // orderItems: cartItems,
+          // shippingAddress,
+          // paymentMethod,
+          // itemsPrice,
+          // shippingPrice,
+          // taxPrice,
+          // totalPrice,
         },
         {
           headers: {

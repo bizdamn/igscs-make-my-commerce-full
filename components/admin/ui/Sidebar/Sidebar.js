@@ -38,7 +38,7 @@ function Sidebar({ location }) {
   const { adminStoreInfo } = state;
   const structure = [
     { id: 0, label: 'Home', link: '/admin/', icon: <HomeIcon /> },
-    { id: 0, label: 'Explore', link: '/admin/explore-products', icon: <TravelExploreIcon /> },
+    // { id: 0, label: 'Explore', link: '/admin/explore-products', icon: <TravelExploreIcon /> },
     {
       id: 1,
       label: 'Products', link: '/admin/products', icon: <FontAwesomeIcon style={{ fontSize: '1.3rem' }} icon={faTags} />,

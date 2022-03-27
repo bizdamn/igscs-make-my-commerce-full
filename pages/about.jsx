@@ -14,7 +14,7 @@ export default function About() {
                 <>
                     <Grid container spacing={2}>
                         <Grid item xs={4}>
-                            <Image src={storeInfo?.logo} height={400} width={400} />
+                            <Image src={storeInfo?.logo} height={400} width={400} alt='Company Logo' />
                         </Grid>
                         <Grid item xs={7}>
                             <Text variant="pageHeading"> Company Highlights</Text>

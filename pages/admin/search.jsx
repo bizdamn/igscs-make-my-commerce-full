@@ -130,9 +130,9 @@ export default function Search(props) {
 
   useEffect(() => {
     if (!adminStoreInfo) {
-      router.push('/admin/login');
+        router.push('/admin/login');
     }
-  }, []);
+}, [router,adminStoreInfo]);
   return (
     <Layout title="Search">
       <Grid className={classes.mt1} container spacing={1}>

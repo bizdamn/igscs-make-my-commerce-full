@@ -9,10 +9,10 @@ export default function SEO() {
     const router = useRouter();
 
     useEffect(() => {
-        if (!adminStoreInfo) {
+      if (!adminStoreInfo) {
           router.push('/admin/login');
-        }
-      }, []);
+      }
+  }, [router,adminStoreInfo]);
     return (
         <Layout>
                <Text variant="pageHeading">Media</Text>

@@ -16,7 +16,7 @@ export default function Home({ physicalProducts,store,digitalProducts }:{ physic
   useEffect(() => {
     dispatch({ type: 'STORE_SETUP', payload: store });
     Cookies.set('storeInfo', JSON.stringify(store));
-  },[dispatch]);
+  },[dispatch,store]);
   const { storeInfo } = state;
 
   return (

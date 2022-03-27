@@ -117,7 +117,8 @@ const CartItem = ({
                 className={s.productImage}
                 width={150}
                 height={150}
-                src={item.images[0]?.url || placeholderImg}
+                
+                src={`/assets${item.images[0]?.url!}` || placeholderImg}
                 alt={item.images[0]?.altText || "Product Image"}
                 unoptimized
               />

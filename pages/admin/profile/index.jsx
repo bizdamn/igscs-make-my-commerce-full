@@ -6,15 +6,15 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from "@mui/material/Button";
 import { useRouter } from 'next/router';
-export default function profile() {
+export default function Profile() {
     const { state } = useContext(AdminDataStore);
     const { adminStoreInfo } = state;
     const router = useRouter();
     useEffect(() => {
-        if (!adminStoreInfo) {
-            router.push('/admin/login');
-        }
-      }, []);
+      if (!adminStoreInfo) {
+          router.push('/admin/login');
+      }
+  }, [router,adminStoreInfo]);
   return (
 
         <Layout>

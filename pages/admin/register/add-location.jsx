@@ -43,7 +43,7 @@ export default function SignUp(props) {
         if (!registerInfo) {
             router.push('/admin/register');
         }
-    }, []);
+    }, [adminStoreInfo,registerInfo,router]);
     const submitHandler = async ({ companyName, addressLine1, addressLine2, city, state, pinCode, country }) => {
    
         closeSnackbar();

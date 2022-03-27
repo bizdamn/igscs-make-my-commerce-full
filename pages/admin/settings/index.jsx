@@ -25,9 +25,9 @@ export default function Setting({store}) {
     const { adminStoreInfo } = state;
     useEffect(() => {
         if (!adminStoreInfo) {
-          router.push('/admin/login');
+            router.push('/admin/login');
         }
-      }, []);
+    }, [adminStoreInfo]);
     const {
         handleSubmit,
         control,

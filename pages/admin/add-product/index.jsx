@@ -9,14 +9,14 @@ import Typography from "@mui/material/Typography";
 import Tooltip from '@mui/material/Tooltip';
 import { AdminDataStore } from '../../../utils/admin/AdminDataStore';
 import IconButton from "@mui/material/IconButton";
-export default function addProduct() {
+export default function AddProduct() {
     const { state } = useContext(AdminDataStore);
     const { adminStoreInfo } = state;
     useEffect(() => {
         if (!adminStoreInfo) {
-          router.push('/admin/login');
+            router.push('/admin/login');
         }
-      }, []);
+    }, [adminStoreInfo]);
     const productTypes = [
         {
             title: "Digital Product",

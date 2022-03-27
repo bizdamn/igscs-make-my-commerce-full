@@ -6,12 +6,11 @@ export default function SEO() {
     const { state, dispatch } = useContext(AdminDataStore);
     const { adminStoreInfo } = state;
     const router = useRouter();
-
     useEffect(() => {
-        if (!adminStoreInfo) {
+      if (!adminStoreInfo) {
           router.push('/admin/login');
-        }
-      }, []);
+      }
+  }, [router,adminStoreInfo]);
     return (
         <Layout>
         </Layout>

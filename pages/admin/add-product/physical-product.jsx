@@ -28,7 +28,7 @@ import FormControl from '@mui/material/FormControl';
 import DigitalFileUpload from '../../../components/admin/products/add-product/DigitalFileUpload'
 import { AdminDataStore } from '../../../utils/admin/AdminDataStore';
 import { useSnackbar } from 'notistack';
-export default function product() {
+export default function Product() {
 
     const router = useRouter();
     const { redirect } = router.query;
@@ -47,14 +47,15 @@ export default function product() {
         }
 
         async function fetch() {
-            const productsData  = await axios.post('/api/admin/products/get-all',{storeID:adminStoreInfo._id})
-        console.log(productsData.data)
-        const df = new dfd.DataFrame(productsData.data)
-        console.log(df)
-        console.log(df.$data)
+            const productsData = await axios.post('/api/admin/products/get-all', { storeID: adminStoreInfo._id })
+            console.log(productsData.data)
+            const df = new dfd.DataFrame(productsData.data)
+            console.log(df)
+            console.log(df.$data)
         }
         fetch()
-    }, []);
+
+    }, [router, adminStoreInfo]);
     function slugify(string) {
         return string
             .toString()
@@ -89,13 +90,13 @@ export default function product() {
         costPerItem: '',
         listPrice: '',
     })
-    const [inventory, setInventory] = useState("");
-    const [vendor, setVendor] = useState("");
-    const [sku, setSKU] = useState("");
-    const [barcode, setBarcode] = useState("");
+    // const [inventory, setInventory] = useState("");
+    // const [vendor, setVendor] = useState("");
+    // const [sku, setSKU] = useState("");
+    // const [barcode, setBarcode] = useState("");
 
-    const submitHandler = async ({ name }) => {
-      
+    const submitHandler = async ({ name, vendor, sku, barcode, inventory }) => {
+
         closeSnackbar();
         try {
             // const productsData  = await axios.post('/api/admin/products/get-all',{storeID:adminStoreInfo._id})
@@ -105,22 +106,22 @@ export default function product() {
             // console.log(df.$data)
             // const productNamesArray = df.column("name")
 
-
-            if(false){
+            if (false) {
                 enqueueSnackbar('Name Already Exists', { variant: 'error' });
             }
-            
-            else{
+
+            else {
                 setButtonProgressLoading(true);
                 const { data } = await axios.post('/api/admin/products/add/physical', {
                     storeID: adminStoreInfo._id,
                     name: name,
+                    vendor: vendor,
                     slug: slugify(name),
                     price: price,
                     listPrice: price.listPrice,
                     descriptionHtml: descriptionHtml,
-                    images: image?([{ url: `/assets/${image.name}`, altText: '' }]):null,
-                    documents: document?([`/documents/${document.name}`]):null,
+                    images: image ? ([{ url: `/${image.name}`, altText: '' }]) : null,
+                    documents: document ? ([`/documents/${document.name}`]) : null,
                     variants: [],
                     options: options,
                     status: status,
@@ -141,10 +142,8 @@ export default function product() {
                 router.push(redirect || '/admin/products');
             }
 
-
-
         } catch (err) {
-            enqueueSnackbar( err,{ variant: 'error' });
+            enqueueSnackbar(err, { variant: 'error' });
             setButtonProgressLoading(false);
         }
     };
@@ -203,7 +202,7 @@ export default function product() {
                     <Grid order={{ xs: 1, lg: 2 }} item component={Paper} lg={4} xs={12} sx={{ p: 3, m: 1 }}>
                         <Stack sx={{ mb: 3 }} spacing={2} direction="row">
                             <Button onClick={() => discard()} variant="outlined">Discard</Button>
-                            <ButtonSaveProgress text='Publish' size='md'  buttonProgressLoading={buttonProgressLoading} setButtonProgressLoading={setButtonProgressLoading} />
+                            <ButtonSaveProgress text='Publish' size='md' buttonProgressLoading={buttonProgressLoading} setButtonProgressLoading={setButtonProgressLoading} />
                         </Stack>
                         {/* Product Status */}
                         <ProductStatus status={status} setStatus={setStatus} />
@@ -234,7 +233,7 @@ export default function product() {
                     <Grid order={{ xs: 4 }} item component={Paper} lg={4} xs={12} sx={{ p: 3, m: 1 }}>
                         <Typography variant='h6' fontWeight={700} component="p">Media</Typography>
                         <Grid sx={{ width: '100%' }} container justifyContent='center'>
-                        <UploadImage   image={image} setImage={setImage} />
+                            <UploadImage image={image} setImage={setImage} />
                         </Grid>
                     </Grid>
 
@@ -242,13 +241,104 @@ export default function product() {
 
                         {/* Inventory */}
                         <Typography variant='h6' fontWeight={700} component="p">Inventory</Typography>
+                        <Controller
+                            name="sku"
+                            control={control}
+                            defaultValue=""
+                            rules={{
+                                required: true,
+                            }}
+                            render={({ field }) => (
+                                <TextField
+                                    variant="outlined"
+                                    fullWidth
+                                    id=""
+                                    label="SKU"
+                                    inputProps={{ type: 'text' }}
+                                    error={Boolean(errors.sku)}
+                                    helperText={
+                                        errors.sku ? 'SKU is required'
+                                            : ''
+                                    }
+                                    {...field}
+                                ></TextField>
+                            )}
+                        ></Controller>
 
-                        <TextField sx={{ m: 2 }} onBlur={(e) => setSKU(e.target.value)} id="outlined-basic" label="SKU (Stock Keeping Unit)" variant="outlined" />
-                        <TextField sx={{ m: 2 }} onBlur={(e) => setBarcode(e.target.value)} id="outlined-basic" label="Barcode (ISBN, UPC, GTIN, etc.)" variant="outlined" />
-                        <Typography sx={{ my: 1 }} component="p" fontSize={13}>Quantity</Typography>
-                        <TextField onBlur={(e) => setInventory(e.target.value)} fullWidth id="outlined-basic" type='number' label="Available" variant="outlined" />
-                        <Typography sx={{ my: 1 }} component="p" fontSize={13}>Vendor Name</Typography>
-                       <TextField onBlur={(e) => setVendor(e.target.value)} fullWidth id="outlined-basic" type='text' label="Vendor Name" variant="outlined" />
+                        <Controller
+                            name="barcode"
+                            control={control}
+                            defaultValue=""
+                            rules={{
+                                required: true,
+                            }}
+                            render={({ field }) => (
+                                <TextField
+                                    variant="outlined"
+                                    fullWidth
+                                    id=""
+                                    label="Barcode"
+                                    inputProps={{ type: 'text' }}
+                                    error={Boolean(errors.barcode)}
+                                    helperText={
+                                        errors.barcode ? 'Barcode is required'
+                                            : ''}
+                                    {...field}
+                                ></TextField>
+                            )}
+                        ></Controller>
+                        {/* <TextField sx={{ m: 2 }} onBlur={(e) => setSKU(e.target.value)} id="outlined-basic" label="SKU (Stock Keeping Unit)" variant="outlined" /> */}
+                        {/* <TextField sx={{ m: 2 }} onBlur={(e) => setBarcode(e.target.value)} id="outlined-basic" label="Barcode (ISBN, UPC, GTIN, etc.)" variant="outlined" /> */}
+                        <Typography required sx={{ my: 1 }} component="p" fontSize={13}>Quantity</Typography>
+                        <Controller
+                            name="inventory"
+                            control={control}
+                            defaultValue=""
+                            rules={{
+                                required: true,
+                            }}
+                            render={({ field }) => (
+                                <TextField
+                                    variant="outlined"
+                                    fullWidth
+                                    id=""
+                                    label="Inventory"
+                                    inputProps={{ type: 'number' }}
+                                    error={Boolean(errors.inventory)}
+                                    helperText={
+                                        errors.inventory? 'Inventory is required'
+                                            : ''
+                                    }
+                                    {...field}
+                                ></TextField>
+                            )}
+                        ></Controller>
+                        {/* <TextField onBlur={(e) => setInventory(e.target.value)} fullWidth id="outlined-basic" type='number' label="Available" variant="outlined" /> */}
+                        <Typography required sx={{ my: 1 }} component="p" fontSize={13}>Vendor Name</Typography>
+                        {/* <TextField onBlur={(e) => setVendor(e.target.value)} fullWidth id="outlined-basic" type='text' label="Vendor Name" variant="outlined" /> */}
+                        <Controller
+                            name="vendor"
+                            control={control}
+                            defaultValue=""
+                            rules={{
+                                required: true,
+                            }}
+                            render={({ field }) => (
+                                <TextField
+                                    variant="outlined"
+                                    fullWidth
+                                    id=""
+                                    label="Vendor"
+                                    inputProps={{ type: 'text' }}
+                                    error={Boolean(errors.vendor)}
+                                    helperText={
+                                        errors.vendor? 'Vendor is required'
+                                            : ''
+                                    }
+                                    {...field}
+                                ></TextField>
+                            )}
+                        ></Controller>
                     </Grid>
 
                     <Grid order={{ xs: 6 }} item component={Paper} lg={4} xs={12} sx={{ p: 3, m: 1 }}>
@@ -258,7 +348,7 @@ export default function product() {
 
                     <Grid order={{ xs: 7 }} item component={Paper} lg={7} xs={12} sx={{ p: 3, m: 1 }}>
                         <Typography variant='h6' fontWeight={700} component="p">Documents</Typography>
-                        <DigitalFileUpload   document={document} setDocument={setDocument} />
+                        <DigitalFileUpload document={document} setDocument={setDocument} />
                     </Grid>
 
                     <Grid order={{ xs: 8 }} item component={Paper} lg={4} xs={12} sx={{ p: 3, m: 1 }}>

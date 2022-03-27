@@ -32,9 +32,9 @@ export default function Products({ digitalProducts, physicalProducts }) {
 
   useEffect(() => {
     if (!adminStoreInfo) {
-      router.push('/admin/login');
+        router.push('/admin/login');
     }
-  }, []);
+}, [router,adminStoreInfo]);
 
   const [tabValue, setTabValue] = React.useState('1');
 
@@ -88,7 +88,7 @@ export default function Products({ digitalProducts, physicalProducts }) {
                         <TableRow key={product._id}>
                           <TableCell>
                           {product.images?.[0] ? (
-                              <Image src={product.images?.[0]?.url} alt={product.images?.[0]?.altText} width={40} height={40}></Image>
+                              <Image src={`/assets${product.images[0]?.url}`} alt={product.images?.[0]?.altText} width={40} height={40}></Image>
                               ) : null}
                               </TableCell>
                           <TableCell>{product.name}</TableCell>

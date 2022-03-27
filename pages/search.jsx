@@ -134,7 +134,7 @@ export default function Search(props) {
 
                 {categories &&
                   categories.map((category) => (
-                    <Typography style={{ pointer: 'cursor' }} onClick={() => categoryHandler(category)}>   {category}</Typography>
+                    <Typography key={category} style={{ pointer: 'cursor' }} onClick={() => categoryHandler(category)}>   {category}</Typography>
 
                   ))}
               </Box>

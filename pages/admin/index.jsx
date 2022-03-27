@@ -30,9 +30,9 @@ export default function HomePage() {
   const { adminStoreInfo } = state;
   useEffect(() => {
     if (!adminStoreInfo) {
-      router.push('/admin/login');
+        router.push('/admin/login');
     }
-  }, []);
+}, [router,adminStoreInfo]);
   const [value, setValue] = React.useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -53,7 +53,7 @@ export default function HomePage() {
               <Box sx={{ borderBottom: 1 }}>
                 <TabList onChange={handleChange} centered>
                   <Tab label="Links" value="1" />
-                  <Tab label="Design" value="2" />
+                  {/* <Tab label="Design" value="2" /> */}
                 </TabList>
               </Box>
               <TabPanel value="1">
@@ -79,32 +79,32 @@ export default function HomePage() {
                   </ChakraProvider>
                 </Container>
               </TabPanel>
-              <TabPanel value="2">
+              {/* <TabPanel value="2">
                 <Grid container spacing={2}>
                
                   <Grid item xs={4}>
-                    <Image onClick={()=>setDemoTheme('https://aaaaa-nu.vercel.app/')} width={170} height={300} src={'/admin/images/themes/0.jpg'}></Image>
+                    <Image alt='Theme' onClick={()=>setDemoTheme('https://aaaaa-nu.vercel.app/')} width={170} height={300} src={'/admin/images/themes/0.jpg'}></Image>
                   </Grid>
                
                   <Grid item xs={4}>
-                    <Image onClick={()=>setDemoTheme('https://1-make-my-commerce.netlify.app/')} width={170} height={300} src={'/admin/images/themes/1.jpg'}></Image>
+                    <Image alt='Theme' onClick={()=>setDemoTheme('https://1-make-my-commerce.netlify.app/')} width={170} height={300} src={'/admin/images/themes/1.jpg'}></Image>
                   </Grid>
                      
                   <Grid item xs={4}>
-                  <Image onClick={()=>setDemoTheme('https://6-make-my-commerce.netlify.app/')} width={170} height={300} src={'/admin/images/themes/6.jpg'}></Image>
+                  <Image alt='Theme' onClick={()=>setDemoTheme('https://6-make-my-commerce.netlify.app/')} width={170} height={300} src={'/admin/images/themes/6.jpg'}></Image>
                   </Grid>
                   <Grid item xs={4}>
-                  <Image onClick={()=>setDemoTheme('https://makeup-mmc.netlify.app/')} width={170} height={300} src={'/admin/images/themes/5.jpg'}></Image>
+                  <Image alt='Theme' onClick={()=>setDemoTheme('https://makeup-mmc.netlify.app/')} width={170} height={300} src={'/admin/images/themes/5.jpg'}></Image>
                   </Grid>
                   <Grid item xs={4}>
-                  <Image onClick={()=>setDemoTheme('https://2-make-my-commerce.netlify.app/')} width={170} height={300} src={'/admin/images/themes/2.jpg'}></Image>
+                  <Image alt='Theme' onClick={()=>setDemoTheme('https://2-make-my-commerce.netlify.app/')} width={170} height={300} src={'/admin/images/themes/2.jpg'}></Image>
                   </Grid>
                   <Grid item xs={4}>
-                  <Image onClick={()=>setDemoTheme('https://3-make-my-commerce.netlify.app/')} width={170} height={300} src={'/admin/images/themes/3.jpg'}></Image>
+                  <Image alt='Theme' onClick={()=>setDemoTheme('https://3-make-my-commerce.netlify.app/')} width={170} height={300} src={'/admin/images/themes/3.jpg'}></Image>
                   </Grid>
               
                   <Grid item xs={4}>
-                  <Image onClick={()=>setDemoTheme('https://4-make-my-commerce.netlify.app/')} width={170} height={300} src={'/admin/images/themes/4.jpg'}></Image>
+                  <Image alt='Theme' onClick={()=>setDemoTheme('https://4-make-my-commerce.netlify.app/')} width={170} height={300} src={'/admin/images/themes/4.jpg'}></Image>
                   </Grid>
               
          
@@ -121,15 +121,17 @@ export default function HomePage() {
                       <ChakraProvider>
 
                         <Link href='/admin/editor'>
+                          a<a>
                           <Button style={{ color: '#008060' }} variant="outline">
                             Try Now
                           </Button>
+                          </a>
                         </Link>
                       </ChakraProvider>
                     </Stack>
                   </Container>
                 </Paper>
-              </TabPanel>
+              </TabPanel> */}
             </TabContext>
           </Grid>
 
@@ -140,11 +142,11 @@ export default function HomePage() {
             >
               {adminStoreInfo ? (
                 <Typography align="center" component="p" fontWeight={400}>
-                  Your Online Store
-                  {/* <a
-                    target="_blank"
-                    href={`${process.env.PROD_URL}/${adminStoreInfo.storeName}`}
-                  >{`${process.env.PROD_URL}/${adminStoreInfo.storeName}`}</a> */}
+                  Your Online Store : &nbsp;
+                  <a
+                    target="_blank"  rel="noreferrer"
+                    href={`${demoURL}`}
+                  >{`${demoURL}`}</a>
                 </Typography>
               ) : (<></>)}
 

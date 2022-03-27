@@ -40,7 +40,7 @@ export default function SignUp(props) {
         if (registerInfo) {
             router.push('/admin/register/add-location');
         }
-    }, []);
+    }, [adminStoreInfo,router]);
 
     const submitHandler = async ({ name, storeName, email, phone, password, confirmPassword }) => {
      

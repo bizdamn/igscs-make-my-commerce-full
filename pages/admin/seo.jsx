@@ -21,9 +21,9 @@ export default function SEO() {
   const { adminStoreInfo } = state;
   useEffect(() => {
     if (!adminStoreInfo) {
-      router.push('/admin/login');
+        router.push('/admin/login');
     }
-  }, []);
+}, [router,adminStoreInfo]);
 
   const {
     handleSubmit,

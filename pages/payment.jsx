@@ -39,7 +39,11 @@ export default function Payment() {
     } else {
       setPaymentMethod(Cookies.get('paymentMethod') || '');
     }
-  }, [setPaymentMethod, shippingAddress, router]);
+  }, [setPaymentMethod, shippingAddress, router,customerInfo,openModal]);
+
+
+
+
   const submitHandler = (e) => {
     closeSnackbar();
     e.preventDefault();

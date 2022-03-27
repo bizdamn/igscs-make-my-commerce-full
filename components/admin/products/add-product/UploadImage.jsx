@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Image from 'next/image'
 export default function UploadImage({ image, setImage }) {
   // const [file, setFile] = useState(null);
 
@@ -262,7 +263,7 @@ export default function UploadImage({ image, setImage }) {
           </span>
           <Typography component='p' className="drop-zoon__paragraph">Drop your file here or Click to Browse</Typography>
           <span id="loadingText" className="drop-zoon__loading-text">Please Wait</span>
-          <img src="" alt="Preview Image" id="previewImage" className="drop-zoon__preview-image" draggable="false" />
+          <img src={''} width='300' height='300' alt="Preview Image" id="previewImage" className="drop-zoon__preview-image" draggable="false" />
 
           <input type="file" onChange={uploadToClient} id="fileInput" className="drop-zoon__file-input" accept="image/*" />
 

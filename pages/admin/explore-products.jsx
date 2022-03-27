@@ -17,7 +17,7 @@ export default function Explore() {
         if (!adminStoreInfo) {
             router.push('/admin/login');
         }
-    }, []);
+    }, [router,adminStoreInfo]);
     async function searchProduct() {
 
     }
