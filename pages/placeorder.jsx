@@ -70,14 +70,14 @@ function PlaceOrder() {
       const { data } = await axios.post(
         '/api/orders',
         {
-          customerID:customerInfo._id
-          // orderItems: cartItems,
-          // shippingAddress,
-          // paymentMethod,
-          // itemsPrice,
-          // shippingPrice,
-          // taxPrice,
-          // totalPrice,
+          customerID:customerInfo._id,
+          orderItems: cartItems,
+          shippingAddress,
+          paymentMethod,
+          itemsPrice,
+          shippingPrice,
+          taxPrice,
+          totalPrice,
         },
         {
           headers: {

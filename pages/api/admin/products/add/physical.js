@@ -33,7 +33,6 @@ handler.post(async (req, res) => {
     });
   const product = await newProduct.save();
   await db.disconnect();
-  console.log(newProduct)
   res.send({'message':'success','productTitle':product.title});
 
 });

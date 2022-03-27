@@ -94,11 +94,11 @@ export default function VerticalTabs() {
                   <Button variant="contained">Add Product</Button>  
                   </a>
               </Link>
-              <Link href='/admin/explore-products'>
+              {/* <Link href='/admin/explore-products'>
                 <a>
                   <Button variant="outlined">Explore Products to Sell</Button>  
                   </a>
-              </Link>
+              </Link> */}
             </Stack>
           </Container>
         </TabPanel>

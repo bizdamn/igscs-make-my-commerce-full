@@ -4,6 +4,7 @@ import { DataStore } from '../../utils/DataStore';
 import NextLink from 'next/link';
 import Image from 'next/image';
 import { Text } from '@components/ui'
+import { Layout } from '@components/common'
 import {
   Grid,
   Avatar,
@@ -265,6 +266,7 @@ function Order({ params }) {
 
   return (
     <>
+    
       <Typography align="center" component="h1" variant="h4">
         Order {orderId}
       </Typography>
@@ -476,3 +478,5 @@ export async function getServerSideProps({ params }) {
 
 
 export default dynamic(() => Promise.resolve(Order), { ssr: false });
+
+Order.Layout = Layout

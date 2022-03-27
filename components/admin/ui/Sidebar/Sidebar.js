@@ -63,8 +63,8 @@ function Sidebar({ location }) {
       label: 'Analytics', link: '/admin/analytics', icon: <FontAwesomeIcon style={{ fontSize: '1.3rem' }} icon={faChartBar} />,
       children: [
         { label: 'Dashboard', link: '/admin/analytics' },
-        { label: 'Reports', link: '/admin/analytics/reports' },
-        { label: 'Live View', link: '/admin/analytics/live' },
+        // { label: 'Reports', link: '/admin/analytics/reports' },
+        // { label: 'Live View', link: '/admin/analytics/live' },
       ],
     },
 
@@ -75,7 +75,7 @@ function Sidebar({ location }) {
       label: 'Customers', link: '/admin/customers', icon: <EmailIcon />,
       children: [
         { label: 'Cutomers', link: '/admin/customers' },
-        { label: 'Email Campaign', link: '/admin/customers/email' },
+        // { label: 'Email Campaign', link: '/admin/customers/email' },
       ],
     },
     {
