@@ -110,7 +110,7 @@ const CartItem = ({
     >
       <div className="flex flex-row space-x-4 py-4">
         <div className="w-16 h-16 bg-violet relative overflow-hidden cursor-pointer z-0">
-          <Link href={`/product/${item.path}`}>
+          <Link href={`/product${item.path}`}>
             <a>
               <Image
                 onClick={() => closeSidebarIfPresent()}
@@ -126,7 +126,7 @@ const CartItem = ({
           </Link>
         </div>
         <div className="flex-1 flex flex-col text-base">
-          <Link href={`/product/${item.path}`}>
+          <Link href={`/product${item.path}`}>
             <a>
               <span
                 className={s.productName}
@@ -141,7 +141,8 @@ const CartItem = ({
             <div className="flex items-center pb-1">
               {options.map((option: ItemOption, i: number) => (
                 <div
-                  key={`${item._id}-${option.displayName}`}
+                key={`${item._id}-${option.displayName}`}
+
                   className="text-sm font-semibold text-accent-7 inline-flex items-center justify-center">
 
                   {option.color ? (

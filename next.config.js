@@ -12,6 +12,9 @@ const isSwell = provider === 'swell'
 const isVendure = provider === 'vendure'
 
 module.exports = withCommerceConfig({
+  images: {
+    domains: ['flagcdn.com'],
+  },
   commerce,
   i18n: {
     locales: ['en-US', 'es'],

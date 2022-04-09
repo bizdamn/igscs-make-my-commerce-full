@@ -80,7 +80,6 @@ export default function DigitalProduct() {
 
     const submitHandler = async ({ name,code }) => {
         closeSnackbar();
-        console.log(digitalAccessType)
         if (digitalAccessType === 'download') {
             if(document){
                 try {
@@ -128,7 +127,6 @@ export default function DigitalProduct() {
         }
         else if(digitalAccessType === 'code'){
             if(code!==''){
-                console.log(code)
                 try {
                     setButtonProgressLoading(true);
                     const { data } = await axios.post('/api/admin/products/add/digital', {
@@ -208,7 +206,7 @@ export default function DigitalProduct() {
                                     fullWidth
                                     id=""
                                     label="Name"
-                                    inputProps={{ type: 'Name' }}
+                                    inputProps={{ type: 'text' }}
                                     error={Boolean(errors.name)}
                                     helperText={
                                         errors.name

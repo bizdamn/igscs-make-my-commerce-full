@@ -73,6 +73,8 @@ function reducer(state, action) {
       return { ...state, cart: { ...state.cart, cartItems: [] } };
     case 'USER_LOGIN':
       return { ...state, adminStoreInfo: action.payload };
+    case 'USER_REGISTER':
+      return { ...state, registerInfo: action.payload };
   
     case 'USER_LOGOUT':
       return {

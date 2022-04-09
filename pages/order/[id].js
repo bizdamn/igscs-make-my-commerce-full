@@ -216,7 +216,6 @@ function Order({ params }) {
     const data = await fetch("/api/keys/razorpay", { method: "POST", body: JSON.stringify({ amount: totalPrice }) }).then((t) =>
       t.json()
     );
-    console.log(data);
     var options = {
       key: process.env.RAZORPAY_KEY, // Enter the Key ID generated from the Dashboard
       name:storeInfo.name,
@@ -241,6 +240,8 @@ function Order({ params }) {
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   };
+
+  
   const initializeRazorpay = () => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -343,7 +344,7 @@ function Order({ params }) {
                               <NextLink href={`/product/${item.slug}`} passHref>
                                 <Link>
                                   <Image
-                                    src={item.images[0].url}
+                                    src={`/assets${item.images[0]?.url}`}
                                     alt={item.images[0].altText}
                                     width={50}
                                     height={50}
@@ -443,7 +444,7 @@ function Order({ params }) {
                   <ListItem>
                     <div className={classes.fullWidth}>
                         <Button  startIcon={<Avatar src={'/admin/images/dashboard/rajorpay.jpg'} />} onClick={() => makeRazorPayPayment(totalPrice)} fullWidth variant='outlined'>
-                          RazorPay
+                          Pay Now
                         </Button>
                       </div>
                   </ListItem>

@@ -6,8 +6,8 @@ const handler = nc();
 handler.post(async (req, res) => {
 
   const client = new SMTPClient({
-    user: 'makemycommerce@gmail.com',
-    password: 'Apoo124@#',
+    user: 'bizdamn@gmail.com',
+    password: 'Bizdamn1435@#$%',
     host: 'smtp.gmail.com',
     ssl: true
   });

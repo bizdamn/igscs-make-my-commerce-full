@@ -13,7 +13,6 @@ export const handler: SWRHook<GetCartHook> = {
 
   async fetcher() {
     const data = await axios.get('/api/cart/get-cart');
-    console.log(data.data)
     return data.data
   },
 
@@ -24,7 +23,6 @@ export const handler: SWRHook<GetCartHook> = {
       const response = useData({
         swrOptions: { revalidateOnFocus: false, ...input?.swrOptions },
       })
-     console.log('use-cart')
 
      
       return useMemo(
@@ -33,7 +31,6 @@ export const handler: SWRHook<GetCartHook> = {
           Object.create(response, {
             isEmpty: {
               get() {
-                console.log(response.data)
                 return (response.data?.lineItems.length ?? 0) <= 0
               },
               enumerable: true,

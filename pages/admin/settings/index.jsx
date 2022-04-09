@@ -54,13 +54,13 @@ export default function Setting({store}) {
         setStoreAudience(e.target.value);
     };
 
-    const submitHandler = async ({ companyName, addressLine1, addressLine2, city, state, pinCode, country }) => {
+    const submitHandler = async ({ }) => {
         setButtonProgressLoading(true)
         closeSnackbar();
 
         try {
             await axios.post('/api/admin/store/store-details', {
-                storeIndustry, storeAudience, companyName, addressLine1, addressLine2, city, country, state, pinCode
+                storeIndustry, storeAudience
             });
             // console.log({ storeIndustry, storeAudience, companyName, addressLine1, addressLine2, city, country, state, pinCode})
             //  await dispatch({ type: 'STORE_DETAILS_ADD_ADDRESS',payload:{addressLine1: addressLine1, addressLine2: addressLine2, city: city, country: country, state: state, pinCode: pinCode} });
@@ -94,13 +94,12 @@ export default function Setting({store}) {
                                     onChange={handleStoreChange}
                                     defaultValue={storeIndustry}
                                 >
-                                    <MenuItem value={'PLC'}>PLC</MenuItem>
+                                    <MenuItem value={'Industrial Automation Parts'}>Industrial Automation Parts</MenuItem>
+                                    <MenuItem value={'IOT Devices'}>IOT Devices</MenuItem>
+                                    <MenuItem value={'Electronic Devices'}>Electronic Devices</MenuItem>
                                     <MenuItem value={'Water Purificatin Plants'}>Water Purificatin Plants</MenuItem>
                                     <MenuItem value={'Rice Mill Machinery'}>Rice Mill Machinery</MenuItem>
-                                    <MenuItem value={'Rice Mill Machinery'}>Rice Mill Machinery</MenuItem>
-                                    <MenuItem value={'Offset Priniting Machines'}>Offset Priniting Machines</MenuItem>
-                                    <MenuItem value={'Sensors'}>Sensors</MenuItem>
-                                    <MenuItem value={'HMC'}>HMC</MenuItem>
+                                    <MenuItem value={'Priniting Machines'}>Priniting Machines</MenuItem>
                                 </Select>
 
                             </FormControl>
@@ -127,224 +126,8 @@ export default function Setting({store}) {
                                 </Select>
                             </FormControl>
                         </Paper>
-
-                        <Typography fontWeight={700} sx={{ my: 2 }} component="p">Store Address</Typography>
-                        <Paper sx={{ p: 3 }} variant="outlined" square>
-
-                            <Controller
-                                name="companyName"
-                                control={control}
-                                rules={{
-                                    required: false,
-                                    minLength: 2,
-                                }}
-                              
-                            render={({ field }) => (
-                                <TextField
-                                    variant="outlined"
-                                    sx={{ my: 2 }}
-                                    fullWidth
-                                    defaultValue={store.storeDetails ? (
-                                        store.storeDetails.companyName ? (store.storeDetails.companyName) : ''
-                                    ) : ''}
-                                    id="title"
-                                    label='Legal Name Of Company'
-                                    inputProps={{ type: 'Title' }}
-                                    error={Boolean(errors.companyName)}
-                                    helperText={
-                                        errors.name
-                                            ? errors.name.type === 'minLength'
-                                                ? 'Company Name length is more than 1'
-                                                : ''
-                                            : ''
-                                    }
-                                    {...field}
-                                ></TextField>
-                            )}
-                            ></Controller>
-
-
-
-
-                        <Controller
-                            name="addressLine1"
-                            control={control}
-                            rules={{
-                                required: false,
-                                minLength: 2,
-                            }}
-                            render={({ field }) => (
-                                <TextField
-                                    variant="outlined"
-                                    sx={{ my: 2 }}
-                                    fullWidth
-                                    id="addressLine1"
-                                    defaultValue={store.address ? (
-                                        store.address.addressLine1 ? (store.address.addressLine1) : ''
-                                    ) : ''}
-                                    label='Address'
-                                    inputProps={{ type: 'text' }}
-                                    error={Boolean(errors.addressLine1)}
-                                    helperText={
-                                        errors.name
-                                            ? errors.name.type === 'minLength'
-                                                ? 'Address  length should be more than 2 characters'
-                                                : ''
-                                            : ''
-                                    }
-                                    {...field}
-                                ></TextField>
-                            )}
-                        ></Controller>
-
-
-                        <Controller
-                            name="addressLine2"
-                            control={control}
-                            rules={{
-                                required: false,
-                                minLength: 2,
-                            }}
-                            render={({ field }) => (
-                                <TextField
-                                    variant="outlined"
-                                    sx={{ my: 2 }}
-                                    fullWidth
-                                    id="addressLine2"
-                                    label='Apartment, suite, etc.'
-                                    defaultValue={store.address ? (
-                                        store.address.addressLine2 ? (store.address.addressLine2) : ''
-                                    ) : ''}
-                                    inputProps={{ type: 'text' }}
-                                    error={Boolean(errors.addressLine2)}
-                                    helperText={
-                                        errors.name
-                                            ? errors.name.type === 'minLength'
-                                                ? 'Address  length should be more than 2 characters'
-                                                : ''
-                                            : ''
-                                    }
-                                    {...field}
-                                ></TextField>
-                            )}
-                        ></Controller>
-
-
-                        <Controller
-                            name="city"
-                            control={control}
-                            rules={{
-                                required: false,
-                            }}
-                            render={({ field }) => (
-                                <TextField
-                                    variant="outlined"
-                                    sx={{ my: 2 }}
-                                    fullWidth
-                                    id="city"
-                                    defaultValue={store.address ? (
-                                        store.address.city ? (store.address.city) : ''
-                                    ) : ''}
-                                    label='City'
-                                    inputProps={{ type: 'text' }}
-                                    error={Boolean(errors.city)}
-
-                                    {...field}
-                                ></TextField>
-                            )}
-                        ></Controller>
-
-
-
-
-                        <Grid sx={{ my: 1 }} container spacing={2}>
-
-                            <Grid item xs={12} lg={4}>
-                                <Controller
-                                    name="state"
-                                    control={control}
-                                    rules={{
-                                        required: false,
-                                    }}
-                                    render={({ field }) => (
-                                        <TextField
-                                            variant="outlined"
-                                            sx={{ my: 2 }}
-                                            fullWidth
-                                            id="state"
-                                            defaultValue={store.address ? (
-                                                store.address.state ? (store.address.state) : ''
-                                            ) : ''}
-                                            label='State'
-                                            inputProps={{ type: 'text' }}
-                                            error={Boolean(errors.state)}
-
-                                            {...field}
-                                        ></TextField>
-                                    )}
-                                ></Controller>
-
-
-                            </Grid>
-                            <Grid item xs={12} lg={4}>
-                                <Controller
-                                    name="pinCode"
-                                    control={control}
-                                    rules={{
-                                        required: false,
-                                    }}
-                                    render={({ field }) => (
-                                        <TextField
-                                            variant="outlined"
-                                            sx={{ my: 2 }}
-                                            fullWidth
-                                            id="pinCode"
-                                            defaultValue={store.address ? (
-                                                store.address.pinCode ? (store.address.pinCode) : ''
-                                            ) : ''}
-                                            label='Pin Code'
-                                            inputProps={{ type: 'number' }}
-                                            error={Boolean(errors.pinCode)}
-
-                                            {...field}
-                                        ></TextField>
-                                    )}
-                                ></Controller>
-
-
-                            </Grid>
-                            <Grid item xs={12} lg={4}>
-                                <Controller
-                                    name="country"
-                                    control={control}
-                                    rules={{
-                                        required: false,
-                                    }}
-                                    render={({ field }) => (
-                                        <TextField
-                                            variant="outlined"
-                                            sx={{ my: 2 }}
-                                            defaultValue={store.address ? (
-                                                store.address.country ? (store.address.country) : ''
-                                            ) : ''}
-                                            fullWidth
-                                            id="country"
-                                            label='Country / Region'
-                                            inputProps={{ type: 'text' }}
-                                            error={Boolean(errors.country)}
-
-                                            {...field}
-                                        ></TextField>
-                                    )}
-                                ></Controller>
-
-                            </Grid>
-                        </Grid>
-
-
                         <ButtonSaveProgress text='Save' size='md' buttonProgressLoading={buttonProgressLoading} setButtonProgressLoading={setButtonProgressLoading} />
-
-                    </Paper>
+                       
                 </form>
 
 

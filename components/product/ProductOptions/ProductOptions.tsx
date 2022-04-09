@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { Swatch } from '@components/product'
 import type { ProductOption } from '@commerce/types/product'
 import { SelectedOptions } from '../helpers'
-
+import { v4 as uuidv4 } from 'uuid';
 interface ProductOptionsProps {
   options: ProductOption[]
   selectedOptions: SelectedOptions
@@ -19,7 +19,7 @@ const ProductOptions: React.FC<ProductOptionsProps> = ({
       {options && options.length !== 0 ? (
         <>
           {options.map((opt) => (
-            <div className="pb-4" key={opt.displayName}>
+            <div className="pb-4" key={`${opt.displayName}-${uuidv4()}`}>
               <h2 className="uppercase font-medium text-sm tracking-wide">
                 {opt.displayName}
               </h2>

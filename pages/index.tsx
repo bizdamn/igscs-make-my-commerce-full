@@ -1,47 +1,66 @@
 import { Layout } from '@components/common'
-import { useContext ,useEffect} from "react";
-import Cookies from 'js-cookie';
+import { useContext, useEffect } from "react";
+// import Cookies from 'js-cookie';
+import Cookies from 'cookies';
 import { DataStore } from "../utils/DataStore";
 import { ProductCard } from '@components/product'
-import { Grid, Marquee, Hero } from '@components/ui'
+import { Marquee, Hero } from '@components/ui'
+// import { Grid, Marquee, Hero } from '@components/ui'
 import db from "../utils/db";
 import PhysicalProduct from "../models/PhysicalProduct";
 import DigitalProduct from "../models/DigitalProduct";
 import Store from "../models/Store";
+import Grid from '@mui/material/Grid';
 
-export default function Home({ physicalProducts,store,digitalProducts }:{ physicalProducts:any,store:any,digitalProducts:any }) {
+export default function Home({ physicalProducts, store, digitalProducts }: { physicalProducts: any, store: any, digitalProducts: any }) {
   const { state, dispatch } = useContext(DataStore);
 
 
   useEffect(() => {
     dispatch({ type: 'STORE_SETUP', payload: store });
-    Cookies.set('storeInfo', JSON.stringify(store));
-  },[dispatch,store]);
+    // Cookies.set('storeInfo', JSON.stringify(store));
+  }, [dispatch, store]);
   const { storeInfo } = state;
 
   return (
     <>
-      <Grid variant="filled">
-        {physicalProducts.slice(0, 3).map((product: any, i: number) => (
-          <ProductCard
-            key={product._id}
-            product={product}
-            imgProps={{
-              width: i === 0 ? 1080 : 540,
-              height: i === 0 ? 1080 : 540,
-            }}
-          />
+      <Grid container spacing={2}>
+
+        {physicalProducts.map((product: any, i: number) => (
+          <Grid   key={product._id} item md={4} xs={12} sm={6} >
+            <ProductCard
+              product={product}
+              imgProps={{
+                width: i === 0 ? 1080 : 540,
+                height: i === 0 ? 1080 : 540,
+              }} />
+          </Grid>
         ))}
+
       </Grid>
+      {/* <Grid variant="filled">
+        {physicalProducts.map((product: any, i: number) => (
+           <>
+           <ProductCard
+             key={product._id}
+             product={product}
+             imgProps={{
+               width: i === 0 ? 1080 : 540,
+               height: i === 0 ? 1080 : 540,
+             }}/>
+         </>
+        ))}
+      </Grid> */}
+        <Hero
+        headline={storeInfo?.storeDetails?.storeIndustry}
+        description={`${storeInfo?.bio.substring(0, 400)}  ${storeInfo?.bio.length > 400 ? '....' : null}`}
+      />
       <Marquee variant="secondary">
-        {physicalProducts.slice(0, 3).map((product: any, i: number) => (
+        {physicalProducts.map((product: any, i: number) => (
           <ProductCard key={product._id} product={product} variant="slim" />
         ))}
       </Marquee>
-      <Hero
-        headline={storeInfo?.storeDetails?.storeIndustry}
-        description={`${storeInfo?.bio.substring(0, 400)}  ${storeInfo?.bio.length>400?'....':null}`}
-      />
+    
       {/* <Grid layout="B" variant="filled">
         {digitalProducts.slice(0, 3).map((product: any, i: number) => (
           <ProductCard
@@ -70,18 +89,21 @@ export default function Home({ physicalProducts,store,digitalProducts }:{ physic
 
 
 
-export async function getServerSideProps() {
+export async function getServerSideProps({req, res}:any) {
   await db.connect();
   const physicalProducts = await PhysicalProduct.find({}).lean();
   const digitalProducts = await DigitalProduct.find({}).lean();
   const store = await Store.find({ _id: process.env.STORE_OBJECT_ID }).lean();
   await db.disconnect();
-
+      // // Create a cookies instance
+      const cookies = new Cookies(req, res)
+      // Set a cookie
+      cookies.set('storeInfo', JSON.stringify(store));
   return {
     props: {
       physicalProducts: physicalProducts.map(db.convertDocToObj),
       digitalProducts: digitalProducts.map(db.convertDocToObj),
-      store:  store.map(db.convertDocToObj)[0],
+      store: store.map(db.convertDocToObj)[0],
     },
   };
 }

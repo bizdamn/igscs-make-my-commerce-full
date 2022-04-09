@@ -30,17 +30,18 @@ const Navbar: FC<NavbarProps> = ({ links }) => {
           <nav className={s.navMenu}>
             {storeInfo?(
              <>
-             {storeInfo.email?(
-                <a href={`mailto:${storeInfo.email}`} className={s.link}><MailIcon/> &nbsp;{storeInfo.email}</a>
-             ):null}
-             {storeInfo.gst?(
-                <a  className={s.link}><CheckCircleOutlineIcon/>GST No. &nbsp;{storeInfo.gst}</a>
-             ):null}
-             {storeInfo.address?(
+          {storeInfo.address.city?(
                 <a href={`/`} className={s.link}><AddLocationAltIcon/> &nbsp;{storeInfo.address.city}</a>
              ):null}
              {storeInfo.phone?(
                 <a href={`tel:${storeInfo.phone}`} className={s.link}><PhoneIcon/> &nbsp;{storeInfo.phone}</a>
+             ):null}
+             {storeInfo.gst?(
+                <a  className={s.link}><CheckCircleOutlineIcon/>GST No. &nbsp;{storeInfo.gst}</a>
+             ):null}
+        
+                     {storeInfo.email?(
+                <a href={`mailto:${storeInfo.email}`} className={s.link}><MailIcon/> &nbsp;{storeInfo.email}</a>
              ):null}
              </>
             ):null}

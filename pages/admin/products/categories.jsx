@@ -62,7 +62,6 @@ export default function Categories({ store}) {
             await axios.post('/api/admin/store/add-categories', {
                 categories: featureFields
             });
-            console.log(featureFields)
             await dispatch({ type: 'UPDATE_CATEGORY', payload: featureFields });
             enqueueSnackbar('Successfully Updated', { variant: 'success' })
             setButtonProgressLoading(false);
@@ -73,7 +72,6 @@ export default function Categories({ store}) {
         }
     };
     const [buttonProgressLoading, setButtonProgressLoading] = React.useState(false);
-    console.log(featureFields)
 
 
     return (

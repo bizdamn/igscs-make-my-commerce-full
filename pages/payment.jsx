@@ -79,15 +79,15 @@ export default function Payment() {
                       ></FormControlLabel>
                     ) : null}
                     <FormControlLabel
-                      label="RazorPay"
+                      label="Online Payment"
                       value="RazorPay"
                       control={<Radio />}
                     ></FormControlLabel>
-                    <FormControlLabel
+                    {/* <FormControlLabel
                       label="PayPal"
                       value="PayPal"
                       control={<Radio />}
-                    ></FormControlLabel>
+                    ></FormControlLabel> */}
 
                   </RadioGroup>
                 </FormControl>

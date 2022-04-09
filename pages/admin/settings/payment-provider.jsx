@@ -72,7 +72,7 @@ export default function SEO() {
                 <Controller
                   name="key"
                   control={control}
-                  defaultValue=""
+                  defaultValue={adminStoreInfo.paymentProviders?.razorpay?.key?adminStoreInfo.paymentProviders?.razorpay?.key:''}
                   rules={{
                     required: true,
                   }}
@@ -99,7 +99,7 @@ export default function SEO() {
                 <Controller
                   name="secret"
                   control={control}
-                  defaultValue=""
+                  defaultValue={adminStoreInfo.paymentProviders?.razorpay?.secret?adminStoreInfo.paymentProviders?.razorpay?.secret:''}
                   rules={{
                     required: true,
                     minLength: 6,

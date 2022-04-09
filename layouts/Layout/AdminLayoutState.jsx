@@ -1,17 +1,17 @@
 import React, { useContext, useEffect } from "react";
 import { useLayoutState } from "../../utils/admin/LayoutContext";
 import { AdminDataStore } from '../../utils/admin/AdminDataStore';
-import { Box, IconButton, Link } from '@material-ui/core'
 import classnames from "classnames";
 
-import LinearProgressComponent from './LinearProgressComponent'
-import Icon from '@mui/material/Icon';
+// import { Box, IconButton, Link } from '@material-ui/core'
+// import LinearProgressComponent from './LinearProgressComponent'
+// import Icon from '@mui/material/Icon';
 //icons
-import {
-  FacebookIcon,
-  TwitterIcon,
-  GithubIcon,
-} from '@mui/icons-material'
+// import {
+//   FacebookIcon,
+//   TwitterIcon,
+//   GithubIcon,
+// } from '@mui/icons-material'
 // styles
 import useStyles from "./styles";
 
@@ -42,7 +42,6 @@ export default function AdminLayoutState(props) {
   return (<>
     {/* <LinearProgressComponent /> */}
     <div sx={{ backgroundColor: '#F6F6F7' }} className={classes.root}>
-      <>
         <Header />
         <Sidebar />
         <div
@@ -57,7 +56,6 @@ export default function AdminLayoutState(props) {
             mt={5}
             width={"100%"}
             display={"flex"}
-            alignItems={"center"}
           >
             <div>
               <Link
@@ -102,7 +100,6 @@ export default function AdminLayoutState(props) {
             </div>
           </Box> */}
         </div>
-      </>
     </div>
   </>);
 }

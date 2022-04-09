@@ -34,7 +34,7 @@ export default function SignUp(props) {
 
     useEffect(() => {
         if (adminStoreInfo) {
-            router.push('/');
+            router.push('/admin');
         }
         const registerInfo=  Cookies.get('registerInfo')
         if (registerInfo) {
@@ -51,6 +51,13 @@ export default function SignUp(props) {
         }
         try {
             setButtonProgressLoading(true);
+            dispatch({ type: 'USER_REGISTER', payload: JSON.stringify({
+                storeName,
+                name,
+                email,
+                phone,
+                password,
+            }) })
             Cookies.set('registerInfo', JSON.stringify({
                 storeName,
                 name,

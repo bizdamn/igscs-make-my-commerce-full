@@ -28,7 +28,7 @@ function Layout(props) {
         <SnackbarProvider
           anchorOrigin={{ vertical: "top", horizontal: "center" }}>
           <AdminDataStoreProvider>
-            <PayPalScriptProvider deferLoading={true}>
+            {/* <PayPalScriptProvider deferLoading={true}> */}
               <ThemeProvider theme={theme}>
                 <ThemeProvider theme={Themes.default}>
                   <AdminLayoutState>
@@ -36,7 +36,7 @@ function Layout(props) {
                   </AdminLayoutState>
                 </ThemeProvider>
               </ThemeProvider>
-            </PayPalScriptProvider>
+            {/* </PayPalScriptProvider> */}
           </AdminDataStoreProvider>
         </SnackbarProvider>
 

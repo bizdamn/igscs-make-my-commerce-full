@@ -6,7 +6,6 @@ const handler = nc();
 
 
 handler.post(async (req, res) => {
-  console.log(req.body.item)
   await db.connect();
   const newCart = new Wishlist({
     lineItems:[{}]})

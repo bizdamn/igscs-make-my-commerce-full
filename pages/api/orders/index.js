@@ -22,7 +22,6 @@ handler.post(async (req, res) => {
   });
   const order = await newOrder.save();
   await db.disconnect();
-  console.log('New Order');
   res.send(order);
 });
 

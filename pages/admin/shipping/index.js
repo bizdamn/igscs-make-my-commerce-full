@@ -54,7 +54,6 @@ function Shipping() {
                 const { data } = await axios.post(`/api/admin/shipping/`, {
                     storeID: adminStoreInfo._id,
                 });
-                console.log(JSON.stringify(data));
                 dispatch({ type: 'FETCH_SUCCESS', payload: data });
             }
             catch (err) {
@@ -84,7 +83,7 @@ function Shipping() {
                             <AddShippingZone shipping={shipping} />
                             <Box sx={{ width: '100%', px: 4 }} >
                                 <Paper sx={{ p: 3 }} variant="outlined" square>
-                                    {shipping[0].shippingZones ? (
+                                    {shipping[0]?.shippingZones ? (
                                         <TableContainer>
                                             <Table>
                                                 <TableHead>
@@ -96,7 +95,7 @@ function Shipping() {
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>
-                                                    {shipping[0].shippingZones.map((shippingZone) => (
+                                                    {shipping[0]?.shippingZones.map((shippingZone) => (
                                                         <TableRow key={shippingZone._id}>
                                                             <TableCell>{shippingZone.zoneName}</TableCell>
 

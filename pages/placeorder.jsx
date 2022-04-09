@@ -85,24 +85,33 @@ function PlaceOrder() {
           },
         }
       );
-      console.log(data)
 
-
-      // await axios.post(
-      //   '/api/email/new-order',
-      //   {
-      //     storeEmail:storeInfo.email,
-      //     orderItems: cartItems,
-      //     paymentMethod,
-      //     totalPrice,
-      //   });
-      // await axios.post(
-      //   '/api/customers/order-count',
-      //   {customerInfo});
+      // New Order Notification to Owner
+      await axios.post(
+        '/api/email/new-order',
+        {
+          storeEmail:storeInfo.email,
+          orderItems: cartItems,
+          paymentMethod,
+          totalPrice,
+        });
+      // Order Details Notification to Customer
+      await axios.post(
+        '/api/email/customer-order-details',
+        {
+          customerEmail:customerInfo.email,
+          orderItems: cartItems,
+          paymentMethod,
+          totalPrice,
+        });
+      await axios.post(
+        '/api/customers/order-count',
+        {customerInfo});
 
       dispatch({ type: 'CART_CLEAR' });
       Cookies.remove('cartItems');
       setLoading(false);
+      enqueueSnackbar('Order Placed Successfully', { variant: 'success' });
       router.push(`/order/${data._id}`);
     } catch (err) {
       setLoading(false);
@@ -161,7 +170,7 @@ function PlaceOrder() {
                             <NextLink href={`/product/${item.slug}`} passHref>
                               <Link>
                                 <Image
-                                  src={item.images[0].url}
+                                  src={`/assets${item.images[0]?.url}`}
                                   alt={item.images[0].altText}
                                   width={50}
                                   height={50}

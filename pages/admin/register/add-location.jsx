@@ -31,7 +31,7 @@ export default function SignUp(props) {
     const { redirect } = router.query;
     const { state, dispatch } = useContext(AdminDataStore);
     const { adminStoreInfo } = state;
-    const [registerInfo,setRegisterInfo] =useState(Cookies.get('registerInfo'))
+    const [registerInfo,setRegisterInfo] =useState(JSON.parse(Cookies.get('registerInfo')))
 
 
 
@@ -44,11 +44,16 @@ export default function SignUp(props) {
             router.push('/admin/register');
         }
     }, [adminStoreInfo,registerInfo,router]);
+
+
+
     const submitHandler = async ({ companyName, addressLine1, addressLine2, city, state, pinCode, country }) => {
+  
    
         closeSnackbar();
         try {
             setButtonProgressLoading(true);
+
             
             const { data } = await axios.post('/api/admin/users/register', {
                 storeName: registerInfo.storeName,
@@ -56,15 +61,14 @@ export default function SignUp(props) {
                 email: registerInfo.email,
                 phone: registerInfo.phone,
                 password: registerInfo.password,
-                companyName,
-                addressLine1,
-                addressLine2,
-                city,
-                state,
-                pinCode,
-                country
+                companyName:companyName,
+                addressLine1: addressLine1,
+                addressLine2: addressLine2,
+                city:city,
+                state:state,
+                pinCode:pinCode,
+                country:country
             });
-            console.log(data)
             dispatch({ type: 'USER_LOGIN', payload: data });
             Cookies.set('adminStoreInfo', JSON.stringify(data));
             router.push(redirect || '/admin');
@@ -120,7 +124,7 @@ export default function SignUp(props) {
                             <Box sx={{ mt: 3 }}>
                                 <Grid container spacing={2}>
 
-                                    <Grid item sx={12} >
+                                    <Grid item xs={12} >
 
                                         <Controller
                                             name="companyName"

@@ -48,10 +48,10 @@ export default function Product() {
 
         async function fetch() {
             const productsData = await axios.post('/api/admin/products/get-all', { storeID: adminStoreInfo._id })
-            console.log(productsData.data)
+            // console.log(productsData.data)
             const df = new dfd.DataFrame(productsData.data)
-            console.log(df)
-            console.log(df.$data)
+            // console.log(df)
+            // console.log(df.$data)
         }
         fetch()
 
@@ -121,7 +121,7 @@ export default function Product() {
                     listPrice: price.listPrice,
                     descriptionHtml: descriptionHtml,
                     images: image ? ([{ url: `/${image.name}`, altText: '' }]) : null,
-                    documents: document ? ([`/documents/${document.name}`]) : null,
+                    documents: document ? ([`/${document.name}`]) : null,
                     variants: [],
                     options: options,
                     status: status,
@@ -182,7 +182,7 @@ export default function Product() {
                                     fullWidth
                                     id=""
                                     label="Name"
-                                    inputProps={{ type: 'Name' }}
+                                    inputProps={{ type: 'text' }}
                                     error={Boolean(errors.name)}
                                     helperText={
                                         errors.name

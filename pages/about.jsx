@@ -29,8 +29,8 @@ export default function About() {
                                     <Td>{storeInfo?.name}</Td>
                                 </Tr>
                                 <Tr>
-                                    <Td>Registered Address</Td>
-                                    <Td>{storeInfo?.address?.addressLine1}{' '}{storeInfo.address?.addressLine2}</Td>
+                                    <Td>Address</Td>
+                                    <Td>{storeInfo?.address?.addressLine1}{' '}{storeInfo.address?.addressLine2}{' '}{storeInfo.address?.city}{' '}{storeInfo.address?.state}{' '}{storeInfo.address?.pinCode}</Td>
                                 </Tr>
 
                                 <Tr>

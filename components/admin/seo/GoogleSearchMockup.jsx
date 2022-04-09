@@ -12,12 +12,12 @@ export default function GoogleSearchMockup() {
         <>
             <Container  justify="center" align="center">
                 <div className="logo">
-                    <Image alt="Google" width="300" height="300" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" />
+                    <Image alt="Google" width="100" height="100" src="/admin/google.png" />
                 </div>
             </Container>
             <div className={styles.bar}>
                 <input className={styles.searchbar} type="text" title="Search" />
-                <Image alt="Google" width="300" height="300" className={styles.voice} src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Google_mic.svg/716px-Google_mic.svg.png" title="Search by Voice" />
+                <Image alt="Google" width="50" height="50" className={styles.voice} src="/admin/Google_mic.svg.webp" title="Search by Voice" />
             </div>
 
             <Container >

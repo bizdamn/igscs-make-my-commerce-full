@@ -29,12 +29,12 @@ export default function AddShippingZone(props) {
   };
 
 
-  const [shippingZones, setShippingZones] = useState(props.shipping[0].shippingZones);
+  const [shippingZones, setShippingZones] = useState(props.shipping[0]?.shippingZones?props.shipping[0]?.shippingZones:[]);
 
-
+console.log(shippingZones);
 
   const submitHandler = async ({ zoneName }) => {
-  const data= await setShippingZones([...shippingZones, { zoneName: zoneName, countries: [country] }])
+  const data=  setShippingZones([...shippingZones, { zoneName: zoneName, countries: [country] }])
     closeSnackbar();
     try {
       await axios.post('/api/admin/shipping/add-shpping-zone', {

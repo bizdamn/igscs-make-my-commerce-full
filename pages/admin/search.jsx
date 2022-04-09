@@ -92,7 +92,7 @@ export default function Search(props) {
     });
   };
   const categoryHandler = (e) => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     filterSearch({ category: e.target.value });
   };
   const pageHandler = (e, page) => {

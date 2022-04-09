@@ -72,7 +72,6 @@ function PricingContent() {
 
 
   const makePayment = async (e) => {
-    console.log(e.price)
     const res = await initializeRazorpay();
 
     if (!res) {
@@ -84,7 +83,6 @@ function PricingContent() {
     const data = await fetch("/api/admin/keys/razorpay", { method: "POST", body: JSON.stringify({ amount: e.price }) }).then((t) =>
       t.json()
     );
-    console.log(data);
     var options = {
       key: 'rzp_test_4qPTbAFC11DvF4', // Enter the Key ID generated from the Dashboard
       name: "Make My Commerce",

@@ -49,7 +49,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
             </Link>
 
 
-            {storeInfo?.address ? (
+            {storeInfo?.address.city ? (
               <a href={`/`} className={s.link}><AddLocationAltIcon /> &nbsp;{storeInfo.address.city}</a>
             ) : null}
             <br />
@@ -70,6 +70,42 @@ const Footer: FC<Props> = ({ className, pages }) => {
                   </Link>
                 </span>
               ))}
+              {storeInfo?.policies?.RefundPolicyHtml ? (
+                <span className="py-3 md:py-0 md:pb-4">
+                  <Link href={'/policies/refund-policy'}>
+                    <a className="text-accent-9 hover:text-accent-6 transition ease-in-out duration-150">
+                      Refund Policy
+                    </a>
+                  </Link>
+                </span>
+              ) : null}
+              {storeInfo?.policies?.PrivacyPolicyHtml ? (
+                <span className="py-3 md:py-0 md:pb-4">
+                  <Link href={'/policies/privacy-policy'}>
+                    <a className="text-accent-9 hover:text-accent-6 transition ease-in-out duration-150">
+                      Privacy Policy
+                    </a>
+                  </Link>
+                </span>
+              ) : null}
+              {storeInfo?.policies?.ShippingPolicyHtml ? (
+                <span className="py-3 md:py-0 md:pb-4">
+                  <Link href={'/policies/shipping-policy'}>
+                    <a className="text-accent-9 hover:text-accent-6 transition ease-in-out duration-150">
+                      Shipping Policy
+                    </a>
+                  </Link>
+                </span>
+              ) : null}
+              {storeInfo?.policies?.TermsOfServiceHtml ? (
+                <span className="py-3 md:py-0 md:pb-4">
+                  <Link href={'/policies/terms-of-services'}>
+                    <a className="text-accent-9 hover:text-accent-6 transition ease-in-out duration-150">
+                      Terms Of Services
+                    </a>
+                  </Link>
+                </span>
+              ) : null}
             </div>
           </div>
           <div className="col-span-1 lg:col-span-2 flex items-start lg:justify-end text-primary">

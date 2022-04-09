@@ -7,7 +7,6 @@ import DigitalProduct from "../../models/DigitalProduct";
 
 
 export default function Slug({product}) {
-  console.log(product)
   const router = useRouter()
 
   return router.isFallback ? (

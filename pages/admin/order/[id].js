@@ -265,10 +265,10 @@ function Order({ params }) {
                         {orderItems.map((item) => (
                           <TableRow key={item._id}>
                             <TableCell>
-                              <NextLink href={`/edit-product/${item.slug}`} passHref>
+                              <NextLink href={`/admin/edit-product/${item.slug}`} passHref>
                                 <Link>
                                   <Image
-                                    src={item.images[0].url}
+                                        src={`/assets${item.images[0]?.url}`}
                                     alt={item.images[0].altText}
                                     width={50}
                                     height={50}

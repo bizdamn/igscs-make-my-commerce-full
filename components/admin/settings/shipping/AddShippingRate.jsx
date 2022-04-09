@@ -46,7 +46,6 @@ export default function AddShippingRate({shipping}) {
 
 
 
-console.log(shipping)
 
 
   return (

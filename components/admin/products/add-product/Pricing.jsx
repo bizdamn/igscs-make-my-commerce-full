@@ -13,7 +13,7 @@ export default function Price({ price, setPrice}) {
 
   return (
     <>
-      <Grid sx={{ my: 2 }} container justifyContent="center" alignItem='center' spacing={2}>
+      <Grid sx={{ my: 2 }} container justifyContent="center" alignItems="center" spacing={2}>
         <Grid item xs={3}>
           <CurrencySelect price={price} setPrice={setPrice} />
         </Grid>

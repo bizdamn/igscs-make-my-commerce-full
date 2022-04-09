@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Layout from '../../../layouts/Layout/Layout';
+import { useRouter } from 'next/router';
 import Image from "next/image";
 import Link from "next/link";
 import Grid from "@mui/material/Grid";
@@ -10,13 +11,14 @@ import Tooltip from '@mui/material/Tooltip';
 import { AdminDataStore } from '../../../utils/admin/AdminDataStore';
 import IconButton from "@mui/material/IconButton";
 export default function AddProduct() {
+    const router = useRouter();
     const { state } = useContext(AdminDataStore);
     const { adminStoreInfo } = state;
     useEffect(() => {
         if (!adminStoreInfo) {
             router.push('/admin/login');
         }
-    }, [adminStoreInfo]);
+    }, [adminStoreInfo,router]);
     const productTypes = [
         {
             title: "Digital Product",
