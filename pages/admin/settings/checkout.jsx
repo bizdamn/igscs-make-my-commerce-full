@@ -29,7 +29,6 @@ export default function Checkout({ store }) {
         router.push('/admin/login');
     }
 }, [adminStoreInfo]);
-  const[CodAvailable, setCodAvailable] = useState(store.checkout?.CodAvailable)
   const[checkoutCustomerAccount, setCheckoutCustomerAccount] = useState(store.checkout?.checkoutCustomerAccount)
   const[lastName, setLastName] = useState(store.formOptions?.lastName)
   const[companyName, setCompanyName] = useState(store.formOptions?.companyName)
@@ -40,8 +39,19 @@ export default function Checkout({ store }) {
     setButtonProgressLoading(true)
     closeSnackbar();
     try {
+      console.log({
+        checkoutCustomerAccount:checkoutCustomerAccount,
+        lastName:lastName,
+        companyName:companyName,
+        addressLine2:addressLine2,
+        shippingAddressPhone:shippingAddressPhone
+      })
       await axios.post('/api/admin/store/checkout', {
-
+        checkoutCustomerAccount:checkoutCustomerAccount,
+        lastName:lastName,
+        companyName:companyName,
+        addressLine2:addressLine2,
+        shippingAddressPhone:shippingAddressPhone
       });
       setButtonProgressLoading(false)
       enqueueSnackbar("Updated Successfully", { variant: 'success' });
@@ -65,27 +75,15 @@ export default function Checkout({ store }) {
 
 
             <Paper sx={{ p: 2, my: 2 }} variant="outlined" square>
-              <Typography fontWeight={700} component="p">Cash On Delivery</Typography>
-              <FormControl>
-                <RadioGroup onChange={setCodAvailable} defaultValue={CodAvailable}>
-                  <FormControlLabel value="true" control={<Radio />} label="Available" />
-                  <FormControlLabel value="false" control={<Radio />} label="Not Available" />
-                </RadioGroup>
-              </FormControl>
-            </Paper>
-
-
-
-            <Paper sx={{ p: 2, my: 2 }} variant="outlined" square>
               <Typography fontWeight={700} component="p">Customer </Typography>
               <Typography sx={{ mb: 2 }} component="p">Choose if you want to prompt your customer to create an account when they check out.</Typography>
               <FormControl>
-                <RadioGroup onChange={setCheckoutCustomerAccount} defaultValue={checkoutCustomerAccount}>
-                  <FormControlLabel value="hidden" control={<Radio />} label="Accounts are disabled" />
+                <RadioGroup  placeholder={checkoutCustomerAccount}>
+                  <FormControlLabel value="hidden" control={<Radio />} label="Accounts are disabled" onClick={()=>setCheckoutCustomerAccount('hidden')}/>
                   <Typography sx={{ mb: 2 }} component="p">Customers will only be able to check out as guests.</Typography>
-                  <FormControlLabel value="optional" control={<Radio />} label="Accounts are optional" />
+                  <FormControlLabel value="optional" control={<Radio />} label="Accounts are optional" onClick={()=>setCheckoutCustomerAccount('optional')}/>
                   <Typography sx={{ mb: 2 }} component="p">Customers will be able to check out with a customer account or as a guest.</Typography>
-                  <FormControlLabel value="required" control={<Radio />} label="Accounts are required" />
+                  <FormControlLabel value="required" control={<Radio />} label="Accounts are required" onClick={()=>setCheckoutCustomerAccount('required')}/>
                   <Typography sx={{ mb: 2 }} component="p">Customers will only be able to check out if they have a customer account.</Typography>
 
                 </RadioGroup>
@@ -100,39 +98,39 @@ export default function Checkout({ store }) {
               <Typography sx={{ mb: 2 }} component="p">Choose whether your checkout form requires extra information from your customer.</Typography>
               <FormControl>
                 <FormLabel>Full name</FormLabel>
-                <RadioGroup onChange={setLastName} defaultValue={lastName}>
-                  <FormControlLabel value="requireLastName" control={<Radio />} label="Require last name only" />
-                  <FormControlLabel value="requireFirstNameLastName" control={<Radio />} label="Require first and last name" />
+                <RadioGroup  placeholder={lastName}>
+                  <FormControlLabel value="requireLastName" control={<Radio />} label="Require last name only" onClick={()=>setLastName('requireLastName')}/>
+                  <FormControlLabel value="requireFirstNameLastName" control={<Radio />} label="Require first and last name" onClick={()=>setLastName('requireFirstNameLastName')}/>
                 </RadioGroup>
               </FormControl>
             </Paper>
             <Paper sx={{ p: 2 }} variant="outlined" square>
               <FormControl>
                 <FormLabel>Company name</FormLabel>
-                <RadioGroup onChange={setCompanyName} defaultValue={companyName}>
-                  <FormControlLabel value="hidden" control={<Radio />} label="Hidden" />
-                  <FormControlLabel value="optional" control={<Radio />} label="Optional" />
-                  <FormControlLabel value="required" control={<Radio />} label="Required" />
+                <RadioGroup  placeholder={companyName}>
+                  <FormControlLabel value="hidden" control={<Radio />} label="Hidden"onClick={()=>setCompanyName('hidden')} />
+                  <FormControlLabel value="optional" control={<Radio />} label="Optional"onClick={()=>setCompanyName('optional')} />
+                  <FormControlLabel value="required" control={<Radio />} label="Required" onClick={()=>setCompanyName('required')}/>
                 </RadioGroup>
               </FormControl>
             </Paper>
             <Paper sx={{ p: 2 }} variant="outlined" square>
               <FormControl>
                 <FormLabel>Address line 2 (apartment, unit, etc.)</FormLabel>
-                <RadioGroup onChange={setAddressLine2} defaultValue={addressLine2}>
-                  <FormControlLabel value="hidden" control={<Radio />} label="Hidden" />
-                  <FormControlLabel value="optional" control={<Radio />} label="Optional" />
-                  <FormControlLabel value="required" control={<Radio />} label="Required" />
+                <RadioGroup placeholder={addressLine2}>
+                  <FormControlLabel value="hidden" control={<Radio />} label="Hidden"onClick={()=>setAddressLine2('hidden')} />
+                  <FormControlLabel value="optional" control={<Radio />} label="Optional"onClick={()=>setAddressLine2('optional')} />
+                  <FormControlLabel value="required" control={<Radio />} label="Required" onClick={()=>setAddressLine2('required')}/>
                 </RadioGroup>
               </FormControl>
             </Paper>
             <Paper sx={{ p: 2 }} variant="outlined" square>
               <FormControl>
                 <FormLabel>Shipping address phone number</FormLabel>
-                <RadioGroup onChange={setShippingAddressPhone} defaultValue={shippingAddressPhone}>
-                  <FormControlLabel value="hidden" control={<Radio />} label="Hidden" />
-                  <FormControlLabel value="optional" control={<Radio />} label="Optional" />
-                  <FormControlLabel value="required" control={<Radio />} label="Required" />
+                <RadioGroup  placeholder={shippingAddressPhone}>
+                  <FormControlLabel value="hidden" control={<Radio />} label="Hidden"onClick={()=>setShippingAddressPhone('hidden')} />
+                  <FormControlLabel value="optional" control={<Radio />} label="Optional" onClick={()=>setShippingAddressPhone('optional')}/>
+                  <FormControlLabel value="required" control={<Radio />} label="Required" onClick={()=>setShippingAddressPhone('required')}/>
                 </RadioGroup>
               </FormControl>
             </Paper>
@@ -142,7 +140,7 @@ export default function Checkout({ store }) {
               <Typography fontWeight={700} component="p">Tipping</Typography>
               <Typography sx={{ mb: 2 }} component="p">Include the option for customers to add a tip at checkout</Typography>
               <FormControl>
-                <RadioGroup onChange={setCodAvailable} defaultValue="requireLastName">
+                <RadioGroup  placeholder="requireLastName">
                   <FormControlLabel value="requireLastName" control={<Radio />} label="Show tipping options at checkout." />
                   <Typography sx={{ mb: 2 }} component="p">Customers can add a tip to their online purchase and show their support for your business</Typography>
                 </RadioGroup>

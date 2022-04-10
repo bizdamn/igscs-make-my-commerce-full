@@ -9,7 +9,7 @@ const handler = nc();
 handler.put(async (req, res) => {
   await db.connect();
   const order = await Order.findById(req.body.orderID);
-  order.isConfirmed = true;
+  order.orderStatus = req.body.orderStatus;
   await order.save();
   const customer = await Customer.findById(order.customer);
 
@@ -24,11 +24,10 @@ handler.put(async (req, res) => {
   try {
     client.send(
       {
-        text: `Your Order with Order Id:${order._id} is Confirmed.
-        We will deliver it soon
-        `,
+        text: `Order ID: ${order._id} 
+        Order Status:${order.orderStatus} `,
         to:customer.email,
-        subject: `Your Order is Confirmed !!`,
+        subject: `Your Order Status !!`,
         from: 'bizdamn@gmail.com',
       }
     )

@@ -13,10 +13,10 @@ export default function About() {
             {storeInfo ? (
                 <>
                     <Grid container spacing={2}>
-                        <Grid item xs={4}>
-                            <Image src={storeInfo?.logo} height={400} width={400} alt='Company Logo' />
+                        <Grid item md={4} sm={12}>
+                            <Image src={storeInfo?.logo? storeInfo?.logo:'/admin/images/logo.svg'} height={400} width={400} alt='Company Logo' />
                         </Grid>
-                        <Grid item xs={7}>
+                        <Grid item md={7} sm={12}>
                             <Text variant="pageHeading"> Company Highlights</Text>
 
                             <Table>

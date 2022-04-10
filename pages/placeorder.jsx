@@ -85,12 +85,14 @@ function PlaceOrder() {
           },
         }
       );
+      console.log(storeInfo)
+      console.log(customerInfo?.email)
 
       // New Order Notification to Owner
       await axios.post(
         '/api/email/new-order',
         {
-          storeEmail:storeInfo.email,
+          storeEmail:storeInfo?.email,
           orderItems: cartItems,
           paymentMethod,
           totalPrice,
@@ -99,7 +101,7 @@ function PlaceOrder() {
       await axios.post(
         '/api/email/customer-order-details',
         {
-          customerEmail:customerInfo.email,
+          customerEmail:customerInfo?.email,
           orderItems: cartItems,
           paymentMethod,
           totalPrice,

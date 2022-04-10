@@ -6,6 +6,8 @@ import CheckoutWizard from '../components/CheckoutWizard';
 import { Layout } from '@components/common'
 import { useUI } from '@components/ui/context'
 import useStyles from '../utils/styles';
+import db from "../utils/db";
+import Store from "../models/Store";
 import {
   Grid,
   FormControl,
@@ -13,21 +15,19 @@ import {
   List,
   ListItem,
   Radio,
+  Typography,
   RadioGroup,
 } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import { Button } from '@components/ui'
-export default function Payment() {
+export default function Payment({store}) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const classes = useStyles();
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState('');
   const { state, dispatch } = useContext(DataStore);
   const { openModal } = useUI()
-  const {customerInfo,
-    storeInfo,
-    cart: { shippingAddress },
-  } = state;
+  const {customerInfo,cart: { shippingAddress }} = state;
   useEffect(() => {
     if (!customerInfo) {
       router.push('/');
@@ -71,18 +71,19 @@ export default function Payment() {
                     value={paymentMethod}
                     onChange={(e) => setPaymentMethod(e.target.value)}
                   >
-                    {storeInfo?.checkout?.CodAvailable ? (
-                      <FormControlLabel
-                        label="Cash On Delivery"
-                        value="COD"
-                        control={<Radio />}
-                      ></FormControlLabel>
-                    ) : null}
+                    
                     <FormControlLabel
                       label="Online Payment"
                       value="RazorPay"
                       control={<Radio />}
                     ></FormControlLabel>
+                    {store?.paymentProviders?.CodAvailable ? (
+                      <FormControlLabel
+                        label="Cash On Delivery"
+                        value="COD"
+                        control={<Radio />}
+                      ></FormControlLabel>
+                    ) : <><Typography fontWeight={700} component="p">Cash On Delivery is Not Available</Typography></>}
                     {/* <FormControlLabel
                       label="PayPal"
                       value="PayPal"
@@ -113,4 +114,18 @@ export default function Payment() {
     </>
   );
 }
+
+
+export async function getServerSideProps({req, res}) {
+  await db.connect();
+  const store = await Store.find({ _id: process.env.STORE_OBJECT_ID }).lean();
+  await db.disconnect();
+
+  return {
+    props: {
+      store: store.map(db.convertDocToObj)[0],
+    },
+  };
+}
+
 Payment.Layout = Layout

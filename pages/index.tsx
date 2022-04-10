@@ -7,9 +7,9 @@ import { ProductCard } from '@components/product'
 import { Marquee, Hero } from '@components/ui'
 // import { Grid, Marquee, Hero } from '@components/ui'
 import db from "../utils/db";
+import Store from "../models/Store";
 import PhysicalProduct from "../models/PhysicalProduct";
 import DigitalProduct from "../models/DigitalProduct";
-import Store from "../models/Store";
 import Grid from '@mui/material/Grid';
 
 export default function Home({ physicalProducts, store, digitalProducts }: { physicalProducts: any, store: any, digitalProducts: any }) {
@@ -53,7 +53,7 @@ export default function Home({ physicalProducts, store, digitalProducts }: { phy
       </Grid> */}
         <Hero
         headline={storeInfo?.storeDetails?.storeIndustry}
-        description={`${storeInfo?.bio.substring(0, 400)}  ${storeInfo?.bio.length > 400 ? '....' : null}`}
+        description={`${storeInfo?.bio?.substring(0, 400)}  ${storeInfo?.bio?.length > 400 ? '....' : null}`}
       />
       <Marquee variant="secondary">
         {physicalProducts.map((product: any, i: number) => (
@@ -91,8 +91,8 @@ export default function Home({ physicalProducts, store, digitalProducts }: { phy
 
 export async function getServerSideProps({req, res}:any) {
   await db.connect();
-  const physicalProducts = await PhysicalProduct.find({}).lean();
-  const digitalProducts = await DigitalProduct.find({}).lean();
+  const physicalProducts = await PhysicalProduct.find({storeID:process.env.STORE_OBJECT_ID }).lean();
+  const digitalProducts = await DigitalProduct.find({storeID:process.env.STORE_OBJECT_ID }).lean();
   const store = await Store.find({ _id: process.env.STORE_OBJECT_ID }).lean();
   await db.disconnect();
       // // Create a cookies instance

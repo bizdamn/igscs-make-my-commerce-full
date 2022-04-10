@@ -31,7 +31,7 @@ export default function SignUp(props) {
     const { redirect } = router.query;
     const { state, dispatch } = useContext(AdminDataStore);
     const { adminStoreInfo } = state;
-    const [registerInfo,setRegisterInfo] =useState(JSON.parse(Cookies.get('registerInfo')))
+    const [registerInfo,setRegisterInfo] =useState(JSON.parse(Cookies.get('registerInfo')?Cookies.get('registerInfo'):null))
 
 
 
@@ -47,7 +47,7 @@ export default function SignUp(props) {
 
 
 
-    const submitHandler = async ({ companyName, addressLine1, addressLine2, city, state, pinCode, country }) => {
+    const submitHandler = async ({ companyName,storeIndustry, addressLine1, addressLine2, city, state, pinCode, country }) => {
   
    
         closeSnackbar();
@@ -62,6 +62,7 @@ export default function SignUp(props) {
                 phone: registerInfo.phone,
                 password: registerInfo.password,
                 companyName:companyName,
+                storeIndustry:storeIndustry,
                 addressLine1: addressLine1,
                 addressLine2: addressLine2,
                 city:city,
@@ -141,12 +142,41 @@ export default function SignUp(props) {
                                                     fullWidth
                                                     id="title"
                                                     label='Legal Name Of Company'
-                                                    inputProps={{ type: 'Title' }}
+                                                    inputProps={{ type: 'text' }}
                                                     error={Boolean(errors.companyName)}
                                                     helperText={
                                                         errors.name
                                                             ? errors.name.type === 'minLength'
                                                                 ? 'Company Name length is more than 1'
+                                                                : ''
+                                                            : ''
+                                                    }
+                                                    {...field}
+                                                ></TextField>
+                                            )}
+                                        ></Controller>
+
+                                        <Controller
+                                            name="storeIndustry"
+                                            control={control}
+                                            defaultValue={''}
+                                            rules={{
+                                                required: true,
+                                                minLength: 2,
+                                            }}
+                                            render={({ field }) => (
+                                                <TextField
+                                                    variant="outlined"
+                                                    sx={{ my: 2 }}
+                                                    fullWidth
+                                                    id="title"
+                                                    label='Store Industry'
+                                                    inputProps={{ type: 'text' }}
+                                                    error={Boolean(errors.companyName)}
+                                                    helperText={
+                                                        errors.name
+                                                            ? errors.name.type === 'minLength'
+                                                                ? 'Store Industry Name length is more than 1'
                                                                 : ''
                                                             : ''
                                                     }

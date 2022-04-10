@@ -43,7 +43,7 @@ export default function HomePage() {
     setDevices(deviceName);
   };
 
-  const [demoURL, setDemoTheme] = useState(adminStoreInfo?.storeLink)
+
   return (
     <>
       <Layout>
@@ -145,8 +145,8 @@ export default function HomePage() {
                   Your Online Store : &nbsp;
                   <a
                     target="_blank"  rel="noreferrer"
-                    href={`${demoURL}`}
-                  >{`${demoURL}`}</a>
+                    href={`${adminStoreInfo?.storeLink}`}
+                  >{`${adminStoreInfo?.storeLink}`}</a>
                 </Typography>
               ) : (<></>)}
 
@@ -181,7 +181,7 @@ export default function HomePage() {
                     <div
                       // style={{ backgroundColor: bgColor }}
                       className={styles["preview-inner"]}>
-                      <iframe width="100%" height="100%" src={demoURL} title="W3Schools Free Online Web Tutorials"></iframe>
+                      <iframe width="100%" height="100%" src={adminStoreInfo?.storeLink} title="W3Schools Free Online Web Tutorials"></iframe>
                       <div className={styles["preview-area"]}>
                         <div height="100%" width="100%">
 

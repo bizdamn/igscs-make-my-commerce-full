@@ -9,7 +9,7 @@ const handler = nc();
 handler.post(async (req, res) => {
   
   await db.connect();
-  const customer = await Customer.findOne({ email: req.body.email });
+  const customer = await Customer.findOne({ email: req.body.email, storeID:process.env.STORE_OBJECT_ID  });
   await db.disconnect();
 
   if (customer && bcrypt.compareSync(req.body.password, customer.password)) {

@@ -24,6 +24,8 @@ import {
   TableBody,
   Button,
 } from '@material-ui/core';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 import Checkbox from '@mui/material/Checkbox';
 import { Text } from '@components/ui'
 import { AdminDataStore } from '../../../utils/admin/AdminDataStore';
@@ -57,12 +59,14 @@ function OrderHistory() {
 
   async function ConfirmOrder(e) {
     if (e.isConfirmed === true) {
-      enqueueSnackbar('Confired Cant be Reversed', { variant: 'error' }
+      enqueueSnackbar("Confirmed Order Can't be Reversed", { variant: 'error' }
       );
     } else {
       await axios.put(`/api/admin/orders/confirm`, {
         orderID: e._id,
       });
+
+      enqueueSnackbar("Order Confirmed", { variant: 'success' })
     }
 
   }
@@ -85,21 +89,30 @@ function OrderHistory() {
       }
     };
     fetchOrders();
-  }, [router,adminStoreInfo]);
+  }, [router, adminStoreInfo]);
 
 
-  const [orderStatus, setOrderStatus] = React.useState('Pending');
-
-  const handleOrderStatusChange = (event) => {
-    setOrderStatus(event.target.value);
+  async function handleOrderStatusChange(order, e) {
+    await axios.put(`/api/admin/orders/order-status-change`, {
+      orderID: order._id,
+      orderStatus: e
+    });
+    enqueueSnackbar("Order Status Updated Successfully", { variant: 'success' })
   };
 
+  const handleClick = () => {
+    console.info('You clicked the Chip.');
+  };
   return (
     <Layout>
 
       <Text variant="pageHeading"> Orders</Text>
       <Grid container alignItems="center" justifyContent="center">
         <Grid item xs={12} >
+          <Stack sx={{my:2}} direction="row" spacing={1}>
+            <Chip label="Clickable" onClick={handleClick} />
+            <Chip label="Clickable" variant="outlined" onClick={handleClick} />
+          </Stack>
           <Box sx={{ width: '100%' }}>
             <Paper elevation={2}>
               <List>
@@ -119,59 +132,46 @@ function OrderHistory() {
                           <Table>
                             <TableHead>
                               <TableRow>
-                                <TableCell>ID</TableCell>
-                                <TableCell>DATE</TableCell>
-                                <TableCell>TOTAL</TableCell>
-                                <TableCell>PAID</TableCell>
-                                <TableCell>DELIVERED</TableCell>
-                                <TableCell>CONFIRMED</TableCell>
-                                <TableCell>STATUS</TableCell>
+                                <TableCell><b>ID</b></TableCell>
+                                <TableCell><b>DATE</b></TableCell>
+                                <TableCell><b>TOTAL</b></TableCell>
+                                <TableCell><b>PAYMENT METHOD</b></TableCell>
+                                <TableCell><b>ACCEPT ORDER</b></TableCell>
+                                <TableCell><b>ORDER STATUS</b></TableCell>
                               </TableRow>
                             </TableHead>
                             <TableBody>
                               {orders.map((order) => (
 
-                                <TableRow key={order._id}>
-                                  <Link href={`/admin/order/${order._id}`}>
+                                <TableRow key={order?._id}>
+                                  <Link href={`/admin/order/${order?._id}`}>
                                     <a>
-                                      <TableCell>{order._id.substring(20, 24)}</TableCell>
+                                      <TableCell>Order #{order?._id.substring(20, 24)}</TableCell>
                                     </a>
                                   </Link>
-                                  <TableCell>{order.createdAt}</TableCell>
-                                  <TableCell>${order.totalPrice}</TableCell>
+                                  <TableCell>{order?.createdAt}</TableCell>
+                                  <TableCell>${order?.totalPrice}</TableCell>
                                   <TableCell>
-                                    {order.isPaid
-                                      ? `Paid at ${order.paidAt}`
-                                      : 'Not Paid'}
+                                    {`${order?.paymentMethod}`}
                                   </TableCell>
+
                                   <TableCell>
-                                    {order.isDelivered
-                                      ? `Delivered at ${order.deliveredAt}`
-                                      : 'Not Delivered'}
-                                  </TableCell>
-                                  <TableCell>
-                                    <Checkbox onChange={() => ConfirmOrder(order)} checked={order.isConfirmed === true ? true : false} defaultChecked />
+                                    <Checkbox onChange={() => ConfirmOrder(order)} checked={order?.isConfirmed === true ? true : false} />
                                   </TableCell>
                                   <TableCell>
                                     <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                                       <Select
-                                        labelId="demo-simple-select-standard-label"
-                                        id="demo-simple-select-standard"
-                                        value={orderStatus}
-                                        onChange={handleOrderStatusChange}
-                                        label="Age"
+                                        defaultValue={order.orderStatus}
+                                        onChange={(e) => handleOrderStatusChange(order, e.target.value)}
                                       >
-
                                         <MenuItem value={'Pending'}>Pending</MenuItem>
                                         <MenuItem value={'Confirmed'}>Confirmed</MenuItem>
-                                        <MenuItem value={'Delivered'}>Delivered</MenuItem>
+                                        <MenuItem value={'Shipped'}>Shipped</MenuItem>
                                         <MenuItem value={'Delivered'}>Delivered</MenuItem>
 
                                       </Select>
                                     </FormControl>
-
                                   </TableCell>
-
                                 </TableRow>
 
                               ))}

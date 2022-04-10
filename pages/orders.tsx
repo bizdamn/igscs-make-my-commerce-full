@@ -105,12 +105,12 @@ export default function Orders() {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell>ID</TableCell>
-                        <TableCell>DATE</TableCell>
-                        <TableCell>TOTAL</TableCell>
-                        <TableCell>PAID</TableCell>
-                        <TableCell>DELIVERED</TableCell>
-                        <TableCell>ACTION</TableCell>
+                        <TableCell><b>ID</b></TableCell>
+                        <TableCell><b>DATE</b></TableCell>
+                        <TableCell><b>TOTAL</b></TableCell>
+                        <TableCell><b>PAYMENT METHOD</b></TableCell>
+                        <TableCell><b>ORDER STATUS</b></TableCell>
+                        <TableCell><b>ACTION</b></TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -120,14 +120,10 @@ export default function Orders() {
                           <TableCell>{order.createdAt}</TableCell>
                           <TableCell>${order.totalPrice}</TableCell>
                           <TableCell>
-                            {order.isPaid
-                              ? `Paid at ${order.paidAt}`
-                              : 'Not Paid'}
+                          {order?.paymentMethod}
                           </TableCell>
                           <TableCell>
-                            {order.isDelivered
-                              ? `Delivered at ${order.deliveredAt}`
-                              : 'Not Delivered'}
+                            {order?.orderStatus}
                           </TableCell>
                           <TableCell>
                             <NextLink href={`/order/${order._id}`} passHref>

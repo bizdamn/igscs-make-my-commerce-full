@@ -11,6 +11,7 @@ import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import EmailIcon from '@mui/icons-material/Email';
 import StoreMallDirectoryIcon from '@mui/icons-material/StoreMallDirectory';
 import SettingsIcon from '@mui/icons-material/Settings';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTags, faChartBar, faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { useTheme } from "@material-ui/styles";
@@ -52,20 +53,20 @@ function Sidebar({ location }) {
     {
       id: 2,
       label: 'Orders', link: '/admin/orders', icon: <FontAwesomeIcon style={{ fontSize: '0.3rem' }} icon={faCartArrowDown} />,
-      children: [
-        { label: 'All Orders', link: '/admin/orders' },
-        { label: 'Drafts', link: '/admin/orders/draft-orders' },
-        { label: 'Unattended Cart', link: '/admin/orders/unattended-cart' },
-      ],
+      // children: [
+      //   { label: 'All Orders', link: '/admin/orders' },
+      //   { label: 'Drafts', link: '/admin/orders/draft-orders' },
+      //   { label: 'Unattended Cart', link: '/admin/orders/unattended-cart' },
+      // ],
     },
     {
       id: 3,
       label: 'Analytics', link: '/admin/analytics', icon: <FontAwesomeIcon style={{ fontSize: '0.3rem' }} icon={faChartBar} />,
-      children: [
-        { label: 'Dashboard', link: '/admin/analytics' },
-        // { label: 'Reports', link: '/admin/analytics/reports' },
-        // { label: 'Live View', link: '/admin/analytics/live' },
-      ],
+      // children: [
+      //   { label: 'Dashboard', link: '/admin/analytics' },
+      //   { label: 'Reports', link: '/admin/analytics/reports' },
+      //   { label: 'Live View', link: '/admin/analytics/live' },
+      // ],
     },
 
     { id: 5, type: 'divider' },
@@ -73,11 +74,12 @@ function Sidebar({ location }) {
     {
       id: 9,
       label: 'Customers', link: '/admin/customers', icon: <EmailIcon />,
-      children: [
-        { label: 'Details', link: '/admin/customers' },
-        // { label: 'Email Campaign', link: '/admin/customers/email' },
-      ],
+      // children: [
+      //   { label: 'Details', link: '/admin/customers' },
+      //   { label: 'Email Campaign', link: '/admin/customers/email' },
+      // ],
     },
+    { id: 98, label: 'Payment', link: '/admin/settings/payment-provider', icon: <CurrencyRupeeIcon /> },
     {
       id: 23, label: 'Settings', link: '/admin/settings', icon: <SettingsIcon />,
       children: [
@@ -85,7 +87,6 @@ function Sidebar({ location }) {
         { label: 'Address', link: '/admin/settings/address' },
         { label: 'Shipping', link: '/admin/shipping' },
         { label: 'Checkout', link: '/admin/settings/checkout' },
-        { label: 'Payment', link: '/admin/settings/payment-provider' },
         { label: 'Billing', link: '/admin/settings/billing' },
         { label: 'Taxes', link: '/admin/settings/taxes' },
         // { label: 'Locations', link: '/admin/settings/locations' },
@@ -99,7 +100,7 @@ function Sidebar({ location }) {
     { id: 6, type: 'title', label: 'ONLINE STORE' },
     { id: 29, label: 'View Online Store', link: `${adminStoreInfo?adminStoreInfo.storeLink:'/'}`, icon: <StoreMallDirectoryIcon /> },
     { id: 10, type: 'divider' },
-    { id: 11, type: 'title', label: 'Pricing' },
+    { id: 11, type: 'title', label: 'Billing' },
     { id: 12, label: 'Plans', link: '/admin/pricing', icon: <Dot size="small" color="secondary" /> },
     // { id: 13, label: 'Starred', link: '', icon: <Dot size="small" color="primary" /> },
   ];

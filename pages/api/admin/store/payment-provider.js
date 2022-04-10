@@ -13,7 +13,8 @@ handler.post(async (req, res) => {
                 razorpay: {
                     key: req.body.key,
                     secret: req.body.secret,
-                }
+                },
+                CodAvailable:req.body.CodAvailable
             }
         }
     });
